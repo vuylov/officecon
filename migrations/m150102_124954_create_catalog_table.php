@@ -9,14 +9,9 @@ class m150102_124954_create_catalog_table extends Migration
     {
         $this->createTable('catalog', [
             'id'        => 'pk',
-            'parent_id' => Schema::TYPE_INTEGER.' NOT NULL',
+            'parent_id' => Schema::TYPE_INTEGER.' DEFAULT NULL',
             'name'      => Schema::TYPE_STRING.' NOT NULL'
         ]);
-
-        $this->insert('catalog', array(
-           'parent_id'  => 0,
-            'name'      => 'Мебель для офиса'
-        ));
     }
 
     public function down()
