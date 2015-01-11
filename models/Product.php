@@ -37,9 +37,9 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'manufacturer_id', 'name'], 'required'],
-            [['user_id', 'manufacturer_id', 'active'], 'integer'],
+            [['user_id', 'manufacturer_id'], 'integer'],
             [['description'], 'string'],
-            [['create_at', 'deactivate_at'], 'safe'],
+            [['create_at', 'deactivate_at', 'active', 'parent_id'], 'safe'],
             [['name'], 'string', 'max' => 255]
         ];
     }
@@ -84,4 +84,21 @@ class Product extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ProductToCatalog::className(), ['product_id' => 'id']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCatalogs()
+    {
+        return $this->hasMany(Catalog::className(), ['id' => 'catalog_id'])->viaTable('productToCatalog', ['product_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getParent()
+    {
+        return $this->hasOne(Product::className(), ['id' => 'parent_id']);
+    }
+
 }

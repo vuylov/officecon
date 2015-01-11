@@ -32,8 +32,9 @@ class Catalog extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'name', 'level'], 'required'],
-            [['parent_id', 'level'], 'integer'],
+            [['name', 'level'], 'required'],
+            [['level'], 'integer'],
+            [['parent_id'], 'safe'],
             [['name'], 'string', 'max' => 255]
         ];
     }
@@ -62,7 +63,7 @@ class Catalog extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCatalogs()
+    public function getChilds()
     {
         return $this->hasMany(Catalog::className(), ['parent_id' => 'id']);
     }
@@ -73,5 +74,13 @@ class Catalog extends \yii\db\ActiveRecord
     public function getProductToCatalogs()
     {
         return $this->hasMany(ProductToCatalog::className(), ['catalog_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProducts()
+    {
+        return $this->hasMany(Product::className(), ['id' => 'product_id'])->viaTable('productToCatalog', ['catalog_id' => 'id']);
     }
 }
