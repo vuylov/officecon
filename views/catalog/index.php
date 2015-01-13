@@ -3,7 +3,7 @@
 
 use yii\helpers\Html;
 ?>
-<h1>catalog/index</h1>
+<h1>Стартовая каталога</h1>
 <?php foreach($catalogs as $catalog):?>
     <div>
         <?=Html::a($catalog->name, ['catalog/view', 'id' => $catalog->id]);?>
