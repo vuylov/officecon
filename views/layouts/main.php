@@ -39,6 +39,7 @@ AppAsset::register($this);
                     ['label' => 'Каталог', 'url' => ['/catalog/index']],
                     ['label' => 'О компании', 'url' => ['/site/about']],
                     ['label' => 'Контакты', 'url' => ['/site/contact']],
+                    ['label' => 'Пользователи', 'url' => ['/user/index']],
                     Yii::$app->user->isGuest ?
                         ['label' => 'Войти', 'url' => ['/site/login']] :
                         ['label' => 'Выйти (' . Yii::$app->user->identity->username . ')',
@@ -51,6 +52,7 @@ AppAsset::register($this);
         <div class="container">
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                'homeLink' => ['label' => 'Главная', 'url' => Yii::$app->homeUrl],
             ]) ?>
             <?= $content ?>
         </div>
