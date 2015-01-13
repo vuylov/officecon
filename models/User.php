@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "user".
@@ -18,7 +20,7 @@ use Yii;
  *
  * @property Product[] $products
  */
-class User extends \yii\db\ActiveRecord
+class User extends ActiveRecord
 {
     /**
      * @inheritdoc
