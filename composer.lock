@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8ec32fb931952be4a07ee22766b99721",
+    "hash": "2bf9921dd62972d8e8b9b8f54b53632b",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -366,6 +366,59 @@
                 "mailer"
             ],
             "time": "2014-12-05 14:17:14"
+        },
+        {
+            "name": "vova07/yii2-imperavi-widget",
+            "version": "1.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vova07/yii2-imperavi-widget.git",
+                "reference": "d660ee278e7ad20148482970d5e233a96810be94"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vova07/yii2-imperavi-widget/zipball/d660ee278e7ad20148482970d5e233a96810be94",
+                "reference": "d660ee278e7ad20148482970d5e233a96810be94",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "vova07\\imperavi\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Crudu Vasile",
+                    "email": "bazillio07@yandex.ru"
+                },
+                {
+                    "name": "Veaceslav Medvedev",
+                    "email": "slavcopost@gmail.com"
+                },
+                {
+                    "name": "Alexander Makarov",
+                    "email": "sam@rmcreative.ru",
+                    "homepage": "http://rmcreative.ru/"
+                }
+            ],
+            "description": "The imperavi redactor widget for Yii framework.",
+            "keywords": [
+                "Redactor",
+                "imperavi",
+                "widget",
+                "wysiwyg",
+                "yii 2",
+                "yii2"
+            ],
+            "time": "2014-12-15 12:56:51"
         },
         {
             "name": "yiisoft/yii2",
