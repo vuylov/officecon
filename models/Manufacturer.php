@@ -11,6 +11,7 @@ use Yii;
  * @property string $name
  * @property string $image
  * @property string $url
+ * @property string $country
  *
  * @property Product[] $products
  */
@@ -31,7 +32,7 @@ class Manufacturer extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['name', 'image', 'url'], 'string', 'max' => 255]
+            [['name', 'image', 'url', 'country'], 'string', 'max' => 255]
         ];
     }
 
@@ -41,10 +42,11 @@ class Manufacturer extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'image' => Yii::t('app', 'Image'),
-            'url' => Yii::t('app', 'Url'),
+            'id' => 'ID',
+            'name' => 'Name',
+            'image' => 'Image',
+            'url' => 'Url',
+            'country' => 'Country',
         ];
     }
 

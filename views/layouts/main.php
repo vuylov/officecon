@@ -37,6 +37,7 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => 'Главная', 'url' => ['/site/index']],
                     ['label' => 'Каталог', 'url' => ['/catalog/index']],
+                    ['label' => 'Продукция', 'url' => ['/product/index']],
                     ['label' => 'О компании', 'url' => ['/site/about']],
                     ['label' => 'Контакты', 'url' => ['/site/contact']],
                     ['label' => 'Пользователи', 'url' => ['/user/index']],
