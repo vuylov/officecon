@@ -18,6 +18,8 @@ use Yii;
  */
 class Catalog extends \yii\db\ActiveRecord
 {
+    const VISIBLE   = 1;
+    const INVISIBLE = 0;
     /**
      * @inheritdoc
      */
@@ -32,8 +34,8 @@ class Catalog extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'level'], 'required'],
-            [['level'], 'integer'],
+            [['name', 'level', 'keywords', 'description'], 'required', 'message' => Yii::t('app', 'Поле обязательно для заполнения')],
+            [['level', 'visible', 'sort'], 'integer', 'message' => Yii::t('app', 'Значение должно быть числовым')],
             [['parent_id'], 'safe'],
             [['name'], 'string', 'max' => 255]
         ];
@@ -45,10 +47,14 @@ class Catalog extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'parent_id' => Yii::t('app', 'Parent ID'),
-            'name' => Yii::t('app', 'Name'),
-            'level' => Yii::t('app', 'Level'),
+            'id'        => Yii::t('app', 'ID'),
+            'parent_id' => Yii::t('app', 'Иерархия'),
+            'name'      => Yii::t('app', 'Название'),
+            'level'     => Yii::t('app', 'Уровень'),
+            'visible'   => Yii::t('app', 'Показывать в каталоге'),
+            'sort'      => Yii::t('app', 'Сортировка'),
+            'keywords'  => Yii::t('app', 'Ключевые слова'),
+            'description'   => Yii::t('app','Описание'),
         ];
     }
 

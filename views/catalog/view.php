@@ -32,3 +32,8 @@ use yii\helpers\VarDumper;
         <?php endif;?>
     </div>
 </div>
+<?
+$this->registerMetaTag(['name' => 'keywords', 'content' => $catalog->keywords]);
+$this->registerMetaTag(['name' => 'description', 'content' => $catalog->description]);
+$this->title = $catalog->name;
+?>
