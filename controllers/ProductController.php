@@ -3,6 +3,7 @@
 namespace app\controllers;
 use app\models\Catalog;
 use app\models\Product;
+use app\models\ProductItem;
 use Yii;
 use yii\web\Controller;
 use yii\helpers\VarDumper;
@@ -12,6 +13,7 @@ class ProductController extends Controller
     public function actionIndex()
     {
         $products = Product::find()->all();
+
         return $this->render('index', compact('products'));
     }
 
@@ -34,6 +36,7 @@ class ProductController extends Controller
 
         $product = new Product();
         $catalog = new Catalog();
+        $item   = new ProductItem();
 
         $catalogIds = Yii::$app->request->post();
         //VarDumper::dump($pc['Catalog']['id'], 10, true);
@@ -52,7 +55,7 @@ class ProductController extends Controller
             }
             echo 'Done';
         }else{
-            return $this->render('create', compact(['product', 'catalog']));
+            return $this->render('create', compact(['product', 'catalog', 'item']));
         }
     }
 }
