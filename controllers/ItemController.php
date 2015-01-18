@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\ProductItem;
-use yii\data\ActiveDataProvider;
+use app\models\ProductItemSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -32,11 +32,11 @@ class ItemController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => ProductItem::find(),
-        ]);
+        $searchModel = new ProductItemSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
