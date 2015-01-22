@@ -1,26 +1,44 @@
 <?php
-use yii\helpers\Html;
-use yii\helpers\VarDumper;
-?>
 
-<h1><?=$product->name?></h1>
-<div>Категория:
-    <?php foreach($product->catalogs as $catalog):?>
-        <span><?=Html::a($catalog->name, ['catalog/view', 'id' => $catalog->id])?></span>
-    <?endforeach;?>
+use yii\helpers\Html;
+use yii\widgets\DetailView;
+
+/* @var $this yii\web\View */
+/* @var $model app\models\Product */
+
+$this->title = $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="product-view">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <p>
+        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Are you sure you want to delete this item?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    </p>
+
+    <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'id',
+            'user_id',
+            'parent_id',
+            'manufacturer_id',
+            'name',
+            'description:ntext',
+            'active',
+            'create_at',
+            'deactivate_at',
+            'producer',
+        ],
+    ]) ?>
+
 </div>
-<div>
-    <?=$product->description?>
-</div>
-<?php if(count($items) > 0):?>
-<div>
-    <hr>
-    <?php foreach($items as $item):?>
-        <div>
-            <?=$item->name;?>
-            <br><small><?=$item->description; ?></small>
-        </div>
-    <?php endforeach;?>
-</div>
-<?php endif;?>
-<?php //VarDumper::dump($product, 10, true);?>

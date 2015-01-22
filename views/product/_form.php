@@ -1,53 +1,37 @@
 <?php
-/* @var $this yii\web\View */
-use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
+
 use yii\helpers\Html;
-use app\models\Catalog;
-use app\models\Manufacturer;
-use app\models\Product;
-use vova07\imperavi\Widget;
-use yii\bootstrap\Modal;
+use yii\widgets\ActiveForm;
+
+/* @var $this yii\web\View */
+/* @var $model app\models\Product */
+/* @var $form yii\widgets\ActiveForm */
 ?>
 
-<?php $form = ActiveForm::begin([
-    'id'    => 'product-form',
-    'options' => ['class' => 'form-horizontal'],
-]);?>
+<div class="product-form">
 
-<?= $form->field($product, 'name');?>
+    <?php $form = ActiveForm::begin(); ?>
 
-<?//= $form->field($product, 'description')->textarea();?>
-<?= $form->field($product, 'description')->widget(Widget::className(),[
-    'settings' => [
-        'lang'         => 'ru',
-        'minHeight'     => 200,
-        'pastePlainText'=> true,
-        'plugins'   => ['table','fullscreen','video', 'fontsize', 'fontcolor']
-    ]
-]);?>
-<?= $form->field($product, 'user_id');?>
-<?= $form->field($product, 'parent_id')->dropDownList(ArrayHelper::map(Product::find()->where('parent_id IS NULL')->all(),'id','name'));?>
-<?= $form->field($product, 'manufacturer_id')->dropDownList(ArrayHelper::map(Manufacturer::find()->all(), 'id', 'name'));?>
-<?= $form->field($catalog, 'id')->checkboxList(ArrayHelper::map(Catalog::find()->all(), 'id', 'name'));?>
+    <?= $form->field($model, 'user_id')->textInput() ?>
 
-<?php
-    Modal::begin([
-        'toggleButton' => [
-            'label' => '<i class="glyphicon glyphicon-plus"></i>Добавить',
-            'class' => 'btn btn-success'
-        ],
-        'closeButton' => [
-            'label' => 'Close',
-            'class' => 'btn btn-danger btn-sm pull-right',
-        ],
-        'size' => 'modal-lg',
-    ]);
-    echo $this->render('/productItem/add', compact(['item']));
-    Modal::end();
-?>
+    <?= $form->field($model, 'parent_id')->textInput() ?>
 
-<div class="pull-right">
-    <?= Html::submitButton(($product->isNewRecord)?"Добавить":"Обновить", ['class' => 'btn btn-primary']) ?>
+    <?= $form->field($model, 'manufacturer_id')->textInput() ?>
+
+    <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
+
+    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'active')->textInput() ?>
+
+    <?= $form->field($model, 'create_at')->textInput() ?>
+
+    <?= $form->field($model, 'deactivate_at')->textInput() ?>
+
+    <div class="form-group">
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+
 </div>
-<?php ActiveForm::end();?>
