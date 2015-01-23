@@ -7,6 +7,7 @@ use app\models\Product;
 use app\models\Catalog;
 use app\models\Manufacturer;
 use vova07\imperavi\Widget;
+use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Product */
@@ -15,7 +16,11 @@ use vova07\imperavi\Widget;
 
 <div class="product-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'options'   => [
+            'enctype'   => 'multipart/form-data'
+        ]
+    ]); ?>
 
     <?= $form->field($model, 'parent_id')->dropDownList(ArrayHelper::map(Product::find()->where('parent_id IS NULL')->all(), 'id', 'name'), [
         'prompt'    => 'Добавить в корень'
@@ -48,8 +53,21 @@ use vova07\imperavi\Widget;
         ]);?>
     <?php endif;?>
 
+    <?php echo $form->field($model, 'file[]')->widget(FileInput::classname(),[
+        'options'       => [
+            'accept' => 'image/*',
+            'multiple' => true
+        ],
+        'pluginOptions' => [
+            'showUpload'        => false,
+            'browseLabel'       => 'Обзор',
+            'removeLabel'       => 'Удалить',
+            'overwriteInitial'  => true,
+        ],
+    ]);
+    ?>
 
-    <div class="form-group">
+    <div class="form-group pull-right">
         <?= Html::submitButton($model->isNewRecord ? 'Добваить' : 'Изменить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 

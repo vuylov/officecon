@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Catalog;
+use app\models\File;
 use Yii;
 use app\models\Product;
 use app\models\ProductSearch;
@@ -11,6 +12,7 @@ use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -74,6 +76,12 @@ class ProductController extends Controller
 
             $catalogs = Yii::$app->request->post('Catalog');
             $model->insertProductToCatalog($catalogs['id']);
+
+            $files = UploadedFile::getInstances($model, 'file');
+            if(count($files) > 0)
+            {
+                File::saveImage(Product::FILE_TYPE, $files, $model);
+            }
 
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
