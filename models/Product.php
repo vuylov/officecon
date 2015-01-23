@@ -3,6 +3,10 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Expression;
+use yii\rbac\Item;
+use yii\web\MethodNotAllowedHttpException;
+use yii\helpers\VarDumper;
 
 /**
  * This is the model class for table "product".
@@ -22,6 +26,8 @@ use Yii;
  */
 class Product extends \yii\db\ActiveRecord
 {
+    const ACTIVE    = 1;
+    const DEACTIVE  = 0;
     /**
      * @inheritdoc
      */
@@ -36,11 +42,11 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'manufacturer_id', 'name'], 'required'],
-            [['user_id', 'manufacturer_id'], 'integer'],
+            [['manufacturer_id', 'name'], 'required', 'message' => 'не может быть пустым'],
+            [['manufacturer_id'], 'integer'],
             [['description'], 'string'],
-            [['create_at', 'deactivate_at', 'active', 'parent_id'], 'safe'],
-            [['name'], 'string', 'max' => 255]
+            [['create_at', 'deactivate_at', 'active', 'parent_id','user_id', 'description'], 'safe'],
+            [['name', 'producer'], 'string', 'max' => 255]
         ];
     }
 
@@ -50,14 +56,16 @@ class Product extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'user_id' => Yii::t('app', 'User ID'),
-            'manufacturer_id' => Yii::t('app', 'Manufacturer ID'),
-            'name' => Yii::t('app', 'Name'),
-            'description' => Yii::t('app', 'Description'),
-            'active' => Yii::t('app', 'Active'),
-            'create_at' => Yii::t('app', 'Create At'),
-            'deactivate_at' => Yii::t('app', 'Deactivate At'),
+            'id'                => Yii::t('app', 'ID'),
+            'parent_id'         => Yii::t('app', 'Относится к'),
+            'user_id'           => Yii::t('app', 'Автор'),
+            'manufacturer_id'   => Yii::t('app', 'Поставщик'),
+            'name'              => Yii::t('app', 'Название'),
+            'description'       => Yii::t('app', 'Описание'),
+            'active'            => Yii::t('app', 'Активность'),
+            'create_at'         => Yii::t('app', 'Создано'),
+            'deactivate_at'     => Yii::t('app', 'Деактивировано'),
+            'producer'          => Yii::t('app', 'Производство')
         ];
     }
 
@@ -96,9 +104,84 @@ class Product extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getItems()
+    {
+        return $this->hasMany(Item::className(), ['product_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getParent()
     {
         return $this->hasOne(Product::className(), ['id' => 'parent_id']);
+    }
+
+    /**
+     * override beforeSave()
+     */
+    public function beforeSave($insert)
+    {
+        if(parent::beforeSave($insert))
+        {
+
+            if($this->isNewRecord){
+                $this->user_id      = Yii::$app->user->id;
+                $this->create_at    = new Expression('NOW()');
+                $this->active       = Product::ACTIVE;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Save relations in junction table productToCatalog
+     * @param Product $product product model
+     * @param Catalog $catalogs many catalog
+     * @throws  MethodNotAllowedHttpException
+     * @return  mixed
+     */
+    public function insertProductToCatalog(array $catalogs)
+    {
+        $db     = Yii::$app->db;
+        $data   = $this->prepareData($catalogs);
+
+        $result = $db->createCommand()->batchInsert('productToCatalog', ['product_id', 'catalog_id'], $data)->execute();
+        if(!$result)
+            throw new MethodNotAllowedHttpException('Not insert rows in productToCatalog table');
+    }
+
+    /**
+     * Delete relations in junction table productToCatalog
+     */
+    public function deleteProductToCatalog()
+    {
+        $db     = Yii::$app->db;
+        $db->createCommand()->delete('productToCatalog', ['product_id' => $this->id])->execute();
+    }
+
+    /**
+     * Prepare data for insertProductToCatalog mathod
+     */
+    private function prepareData(array $catalogs)
+    {
+        $ar = [];
+        foreach($catalogs as $catalogId)
+        {
+            $ar[] = [$this->id, (int)$catalogId];
+        }
+        return $ar;
+    }
+
+    /**
+     * Deactivate product in system. Hide product from front site
+     */
+    private function Deactivate()
+    {
+        $this->active = 0;
+        $this->deactivate_at = new Expression('NOW()');
+        $this->save();
     }
 
 }

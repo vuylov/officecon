@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Product */
 
-$this->title = 'Create Product';
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
+$this->title = 'Добавление нового продукта';
+$this->params['breadcrumbs'][] = ['label' => 'Продукты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-create">
@@ -15,7 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
-        'model' => $model,
+        'model'     => $model,
+        'catalog'   => $catalog
     ]) ?>
 
 </div>

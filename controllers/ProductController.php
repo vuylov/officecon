@@ -2,9 +2,12 @@
 
 namespace app\controllers;
 
+use app\models\Catalog;
 use Yii;
 use app\models\Product;
 use app\models\ProductSearch;
+use yii\helpers\ArrayHelper;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -48,8 +51,12 @@ class ProductController extends Controller
      */
     public function actionView($id)
     {
+        $model      = $this->findModel($id);
+        $catalogs   = ArrayHelper::getColumn($model->catalogs, 'name');
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model'     => $model,
+            'catalogs'  => $catalogs
         ]);
     }
 
@@ -60,13 +67,19 @@ class ProductController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Product();
+        $model      = new Product();
+        $catalog    = new Catalog();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $catalogs = Yii::$app->request->post('Catalog');
+            $model->insertProductToCatalog($catalogs['id']);
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model'     => $model,
+                'catalog'   => $catalog
             ]);
         }
     }
@@ -79,13 +92,19 @@ class ProductController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model              = $this->findModel($id);
+        $catalogChecked     = ArrayHelper::getColumn($model->catalogs, 'id');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->deleteProductToCatalog();
+            $catalogs = Yii::$app->request->post('Catalog');
+            $model->insertProductToCatalog($catalogs['id']);
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
-                'model' => $model,
+                'model'     => $model,
+                'catalogChecked'   => $catalogChecked
             ]);
         }
     }

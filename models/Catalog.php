@@ -47,7 +47,7 @@ class Catalog extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'        => Yii::t('app', 'ID'),
+            'id'        => Yii::t('app', 'Каталог'),
             'parent_id' => Yii::t('app', 'Иерархия'),
             'name'      => Yii::t('app', 'Название'),
             'level'     => Yii::t('app', 'Уровень'),

@@ -15,26 +15,42 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы уверены что хотите удалить продукт',
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a('Добавить артикул', ['item/create', 'product' => $model->id], ['class' => 'btn btn-success']);?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'user_id',
-            'parent_id',
-            'manufacturer_id',
             'name',
-            'description:ntext',
-            'active',
+            [
+                'label' => 'Продукт относится',
+                'value' => ($model->parent->name)?$model->parent->name:'Корневой'
+            ],
+            [
+                'label' => 'Поставщик',
+                'value' => $model->manufacturer->name
+            ],
+            [
+                'label' => 'Кталог',
+                'value' => implode(', ', $catalogs)
+            ],
+            'description:html',
+            [
+                'label' => 'Отображение на сайте',
+                'value' => ($model->active)?'Да':'Нет'
+            ],
+            [
+                'label' => 'Продукт добавил',
+                'value' => $model->user->name
+            ],
             'create_at',
             'deactivate_at',
             'producer',
