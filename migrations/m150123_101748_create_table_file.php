@@ -11,6 +11,7 @@ class m150123_101748_create_table_file extends Migration
             'id'            => 'pk',
             'fid'           => Schema::TYPE_INTEGER.' NOT NULL',
             'type'          => Schema::TYPE_STRING.' NOT NULL',
+            'name'          => Schema::TYPE_STRING.' NOT NULL',
             'path'          => Schema::TYPE_STRING.' NOT NULL',
             'thumbnail'     => Schema::TYPE_STRING,
             'extension'     => Schema::TYPE_STRING,
