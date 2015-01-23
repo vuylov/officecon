@@ -28,6 +28,10 @@ class Product extends \yii\db\ActiveRecord
 {
     const ACTIVE    = 1;
     const DEACTIVE  = 0;
+    const FILE_TYPE = 'product';
+
+    public $file; //image field for upload images
+
     /**
      * @inheritdoc
      */
@@ -45,7 +49,7 @@ class Product extends \yii\db\ActiveRecord
             [['manufacturer_id', 'name'], 'required', 'message' => 'не может быть пустым'],
             [['manufacturer_id'], 'integer'],
             [['description'], 'string'],
-            [['create_at', 'deactivate_at', 'active', 'parent_id','user_id', 'description'], 'safe'],
+            [['create_at', 'deactivate_at', 'active', 'parent_id','user_id', 'description', 'file'], 'safe'],
             [['name', 'producer'], 'string', 'max' => 255]
         ];
     }
@@ -65,7 +69,8 @@ class Product extends \yii\db\ActiveRecord
             'active'            => Yii::t('app', 'Активность'),
             'create_at'         => Yii::t('app', 'Создано'),
             'deactivate_at'     => Yii::t('app', 'Деактивировано'),
-            'producer'          => Yii::t('app', 'Производство')
+            'producer'          => Yii::t('app', 'Производство'),
+            'file'              => Yii::t('app', 'Изображения для загрузки')
         ];
     }
 
@@ -118,6 +123,15 @@ class Product extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFiles()
+    {
+        return $this->hasMany(File::className(), ['fid' => 'id'])
+            ->where(['type' => self::FILE_TYPE]);
+    }
+
+        /**
      * override beforeSave()
      */
     public function beforeSave($insert)
@@ -183,5 +197,4 @@ class Product extends \yii\db\ActiveRecord
         $this->deactivate_at = new Expression('NOW()');
         $this->save();
     }
-
 }

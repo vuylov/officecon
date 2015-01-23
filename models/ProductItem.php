@@ -22,6 +22,7 @@ use Yii;
  */
 class ProductItem extends \yii\db\ActiveRecord
 {
+    const FILE_TYPE = 'item';
     /**
      * @inheritdoc
      */
