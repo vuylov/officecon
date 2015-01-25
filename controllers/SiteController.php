@@ -4,10 +4,12 @@ namespace app\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\File;
 
 class SiteController extends Controller
 {
@@ -92,5 +94,19 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionTest()
+    {
+        $f = new File();
+        $f->fid = 10;
+        $f->type = 'product';
+        $f->name = 'pinguins';
+        $f->path = 'path';
+        $f->extension = 'jpg';
+
+        if(!$f->save()){
+            VarDumper::dump($f->errors);
+        }
     }
 }
