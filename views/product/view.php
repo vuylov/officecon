@@ -8,7 +8,7 @@ use metalguardian\fotorama\Fotorama;
 /* @var $model app\models\Product */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Продукты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-view">
@@ -55,14 +55,31 @@ $this->params['breadcrumbs'][] = $this->title;
             'create_at',
             'deactivate_at',
             'producer',
+            [
+                'label' => 'Артикулы',
+                'value' => implode(', ', \yii\helpers\ArrayHelper::map($model->items, 'id', 'article'))
+            ],
         ],
     ]) ?>
 
     <?php if(count($model->files) > 0):?>
     <div>
+        <?php $fotorama = Fotorama::begin([
+           'options'    => [
+               'loop'   => true,
+               'hash'   => true,
+               'width'  => 600,
+               'height' => 400,
+               'allowfullscreen' => 'native'
+           ] ,
+            'spinner'   => [
+                'lines' => 20,
+            ]
+        ]);?>
         <?php foreach($model->files as $img):?>
             <?= Yii::$app->formatter->asImage('@web/'.$img->path, ['title' => $img->name, 'alt' => $img->name]);?>
         <?php endforeach;?>
+        <?php $fotorama->end();?>
     </div>
     <?php endif;?>
 </div>

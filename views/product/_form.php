@@ -29,7 +29,6 @@ use kartik\file\FileInput;
     <?= $form->field($model, 'manufacturer_id')->dropDownList(ArrayHelper::map(Manufacturer::find()->all(), 'id', 'name'), [
         'prompt'    => 'Укажите поставщика'
     ]); ?>
-
     <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
 
     <?= $form->field($model, 'producer')->textInput(['maxlength' => 255]) ?>
@@ -51,6 +50,23 @@ use kartik\file\FileInput;
         <?= Html::checkboxList('Catalog[id]', $catalogChecked, ArrayHelper::map(Catalog::find()->all(), 'id', 'name'), [
             'separator' => '<br>'
         ]);?>
+    <?php endif;?>
+
+    <?php if(count($model->files) > 0):?>
+        <div class="product-images">
+            <?php foreach($model->files as $img):?>
+                <div class="image-item">
+                    <?=Html::img('@web/'.$img->path, ['id' => 'file-'.$img->id, 'class' => 'file-preview-image', 'alt' => $img->name, 'data' => $img->id]);?>
+                    <?=Html::a('Удалить', ['file/delete', 'id' => $img->id],[
+                        'class' => 'btn btn-danger delete-image',
+                        'data' => [
+                            'confirm' => 'Вы уверены что хотите удалить изображение',
+                            'method' => 'post',
+                        ],
+                    ]);?>
+                </div>
+            <?php endforeach;?>
+        </div>
     <?php endif;?>
 
     <?php echo $form->field($model, 'file[]')->widget(FileInput::classname(),[

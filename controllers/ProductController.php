@@ -77,11 +77,8 @@ class ProductController extends Controller
             $catalogs = Yii::$app->request->post('Catalog');
             $model->insertProductToCatalog($catalogs['id']);
 
-            $files = UploadedFile::getInstances($model, 'file');
-            if(count($files) > 0)
-            {
-                File::saveImage(Product::FILE_TYPE, $files, $model);
-            }
+            File::saveUploadedImage($model, 'file');
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -106,6 +103,8 @@ class ProductController extends Controller
             $model->deleteProductToCatalog();
             $catalogs = Yii::$app->request->post('Catalog');
             $model->insertProductToCatalog($catalogs['id']);
+
+            File::saveUploadedImage($model, 'file');
 
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -138,7 +137,7 @@ class ProductController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Product::find()->where(['id' => $id])->with(['files'])->one()) !== null) {
+        if (($model = Product::find()->where(['id' => $id])->with(['files', 'items'])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
