@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use metalguardian\fotorama\Fotorama;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Product */
@@ -57,4 +58,11 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+    <?php if(count($model->files) > 0):?>
+    <div>
+        <?php foreach($model->files as $img):?>
+            <?= Yii::$app->formatter->asImage('@web/'.$img->path, ['title' => $img->name, 'alt' => $img->name]);?>
+        <?php endforeach;?>
+    </div>
+    <?php endif;?>
 </div>

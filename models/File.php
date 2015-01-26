@@ -79,8 +79,11 @@ class File extends \yii\db\ActiveRecord
             $dbFile->path       = 'upload/'.$rName.'.'.$file->extension;
             $dbFile->extension  = $file->extension;
 
+<<<<<<< HEAD
             $dbFile->save();
 
+=======
+>>>>>>> 1f09ab2a28b52bc89c2d5a44323f7e45114f4d2b
             if($dbFile->save()){
                 $file->saveAs($dbFile->path);
             }
@@ -98,6 +101,8 @@ class File extends \yii\db\ActiveRecord
             if($this->isNewRecord){
                 $this->create_at = new Expression('NOW()');
             }
+            return true;
         }
+        return false;
     }
 }
