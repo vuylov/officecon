@@ -8,7 +8,8 @@ use yii\db\Expression;
 use yii\helpers\VarDumper;
 use yii\web\HttpException;
 use yii\web\MethodNotAllowedHttpException;
-use yii\widgets\ActiveForm;
+use yii\helpers\StringHelper;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "file".
@@ -63,35 +64,64 @@ class File extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function saveImage($type = null, array $files, ActiveRecord $model)
+    /**
+     * @param ActiveRecord $model $model with uploaded files
+     * @param string $field model field with files
+     * @return integer $count number uploaded files
+     */
+    public static function saveUploadedImage(ActiveRecord $model, $field)
     {
-        if(is_null($type))
-            throw new MethodNotAllowedHttpException('SaveImage method not work well');
+        $files = UploadedFile::getInstances($model, $field);
+        $count = count($files);
+        if($count > 0){
 
-        foreach($files as $file)
-        {
+            $type = strtolower(StringHelper::basename(get_class($model)));
 
-            $dbFile             = new File();
-            $rName              = Yii::$app->security->generateRandomString(self::FILE_NAME_SYMBOLS);
-            $dbFile->fid        = $model->id;
-            $dbFile->type       = $type;
-            $dbFile->name       = $file->baseName;
-            $dbFile->path       = 'upload/'.$rName.'.'.$file->extension;
-            $dbFile->extension  = $file->extension;
+            foreach($files as $file)
+            {
+                $dbFile             = new File();
+                $rName              = Yii::$app->security->generateRandomString(self::FILE_NAME_SYMBOLS);
+                $dbFile->fid        = $model->id;
+                $dbFile->type       = $type;
+                $dbFile->name       = $file->baseName;
+                $dbFile->path       = 'upload/'.$rName.'.'.$file->extension;
+                $dbFile->extension  = $file->extension;
 
-<<<<<<< HEAD
-            $dbFile->save();
-
-=======
->>>>>>> 1f09ab2a28b52bc89c2d5a44323f7e45114f4d2b
-            if($dbFile->save()){
-                $file->saveAs($dbFile->path);
+                $dbFile->save();
+                if($dbFile->save()){
+                    $file->saveAs($dbFile->path);
+                }
+                else{
+                    VarDumper::dump($dbFile->errors, 10, true);
+                    return false;
+                }
+                unset($dbFile);
             }
-            else{
-                VarDumper::dump($dbFile->errors, 10, true);
-            }
-            unset($dbFile);
         }
+        return $count;
+    }
+
+    /**
+     * @param ActiveRecord $model base model
+     * @return int $count number of deleted files
+     * @throws \Exception
+     */
+    public static function deleteRelatedFiles(ActiveRecord $model)
+    {
+        //self::deleteAll('fid = :fid AND type = :type', [':fid' => $model->id, ':type' => $model->baseFileType]);
+        $files = File::find()->where(['fid' => $model->id, 'type' => $model->baseFileType])->all();
+        $count = count($files);
+        if($count > 0){
+            foreach($files as $file){
+                $fp = Yii::getAlias('@webroot').'/'.$file->path;
+                if(file_exists($fp)){
+                    unlink($fp);
+                    $file->delete();
+                }
+                unset($file);
+            }
+        }
+        return $count;
     }
 
     public function beforeSave($insert)

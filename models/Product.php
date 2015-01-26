@@ -4,7 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\db\Expression;
-use yii\rbac\Item;
+use app\models\Item;
 use yii\web\MethodNotAllowedHttpException;
 use yii\helpers\VarDumper;
 
@@ -131,7 +131,7 @@ class Product extends \yii\db\ActiveRecord
             ->where(['type' => self::FILE_TYPE]);
     }
 
-        /**
+     /**
      * override beforeSave()
      */
     public function beforeSave($insert)
@@ -144,6 +144,18 @@ class Product extends \yii\db\ActiveRecord
                 $this->create_at    = new Expression('NOW()');
                 $this->active       = Product::ACTIVE;
             }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * override beforeDelete()
+     */
+    public function beforeDelete()
+    {
+        if(parent::beforeDelete()){
+            File::deleteRelatedFiles($this);
             return true;
         }
         return false;
@@ -196,5 +208,10 @@ class Product extends \yii\db\ActiveRecord
         $this->active = 0;
         $this->deactivate_at = new Expression('NOW()');
         $this->save();
+    }
+
+    public function getBaseFileType()
+    {
+        return self::FILE_TYPE;
     }
 }

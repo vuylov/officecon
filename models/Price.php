@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "productPrice".
@@ -16,7 +17,7 @@ use Yii;
  * @property Currency $currency
  * @property ProductItem $productItem
  */
-class ProductPrice extends \yii\db\ActiveRecord
+class Price extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -66,6 +67,6 @@ class ProductPrice extends \yii\db\ActiveRecord
      */
     public function getProductItem()
     {
-        return $this->hasOne(ProductItem::className(), ['id' => 'productItem_id']);
+        return $this->hasOne(Item::className(), ['id' => 'productItem_id']);
     }
 }

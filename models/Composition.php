@@ -57,4 +57,9 @@ class Composition extends \yii\db\ActiveRecord
     {
         return $this->hasMany(CompositionItem::className(), ['composition_id' => 'id']);
     }
+
+    public function getBaseFileType()
+    {
+        return self::FILE_TYPE;
+    }
 }
