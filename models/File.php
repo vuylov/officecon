@@ -70,27 +70,23 @@ class File extends \yii\db\ActiveRecord
 
         foreach($files as $file)
         {
-            VarDumper::dump($file, 10, true);
 
             $dbFile             = new File();
             $rName              = Yii::$app->security->generateRandomString(self::FILE_NAME_SYMBOLS);
-
             $dbFile->fid        = $model->id;
             $dbFile->type       = $type;
             $dbFile->name       = $file->baseName;
             $dbFile->path       = 'upload/'.$rName.'.'.$file->extension;
             $dbFile->extension  = $file->extension;
 
-            $dbFile->save(false);
-
-            /*VarDumper::dump($dbFile, 10, true);
+            $dbFile->save();
 
             if($dbFile->save()){
                 $file->saveAs($dbFile->path);
             }
             else{
                 VarDumper::dump($dbFile->errors, 10, true);
-            }*/
+            }
             unset($dbFile);
         }
     }
