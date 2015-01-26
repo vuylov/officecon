@@ -23,6 +23,8 @@ use yii\db\ActiveRecord;
 class Item extends ActiveRecord
 {
     const FILE_TYPE = 'item';
+
+    public $file; //use for uploading files
     /**
      * @inheritdoc
      */
@@ -36,10 +38,11 @@ class Item extends ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'article'], 'required'],
+            [['product_id', 'article'], 'required', 'message' => 'Необходимо заполнить'],
             [['product_id', 'amount'], 'integer'],
             [['weight', 'volume'], 'number'],
             [['description'], 'string'],
+            [['file'], 'safe'],
             [['article', 'size'], 'string', 'max' => 255]
         ];
     }
@@ -51,13 +54,14 @@ class Item extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'product_id' => 'Product ID',
-            'article' => 'Article',
-            'size' => 'Size',
-            'weight' => 'Weight',
-            'volume' => 'Volume',
-            'amount' => 'Amount',
-            'description' => 'Description',
+            'product_id' => 'Продукт',
+            'article' => 'Артикль',
+            'size' => 'Размер',
+            'weight' => 'Вес',
+            'volume' => 'Объем',
+            'amount' => 'Количество',
+            'description' => 'Описание',
+            'file'      => 'Изображения для загрузки'
         ];
     }
 
@@ -80,9 +84,9 @@ class Item extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProductPrices()
+    public function getPrices()
     {
-        return $this->hasMany(ProductPrice::className(), ['productItem_id' => 'id']);
+        return $this->hasMany(Price::className(), ['productItem_id' => 'id']);
     }
 
     /**
@@ -91,5 +95,23 @@ class Item extends ActiveRecord
     public function getFiles()
     {
         return $this->hasMany(File::className(), ['fid' => 'id'])->where(['type' => self::FILE_TYPE]);
+    }
+
+    public function getBaseFileType()
+    {
+        return self::FILE_TYPE;
+    }
+
+    /**
+     * override beforeDelete
+     */
+    public function beforeDelete()
+    {
+        if(parent::beforeDelete())
+        {
+            File::deleteRelatedFiles($this);
+            return true;
+        }
+        return false;
     }
 }

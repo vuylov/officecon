@@ -6,6 +6,7 @@ use app\models\Product;
 use Yii;
 use app\models\Item;
 use app\models\ItemSearch;
+use app\models\File;
 use yii\web\Controller;
 use yii\web\MethodNotAllowedHttpException;
 use yii\web\NotFoundHttpException;
@@ -67,14 +68,19 @@ class ItemController extends Controller
         if($product === null)
             throw new MethodNotAllowedHttpException('Product not initialized');
 
-        $model = new Item();
-        $model->product_id = $product;
+        $model  = new Item();
+        $product= Product::findOne($product);
+        $model->product_id = $product->id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            File::saveUploadedImage($model, 'file');
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model'     => $model,
+                'product'   => $product
             ]);
         }
     }
@@ -90,6 +96,9 @@ class ItemController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            File::saveUploadedImage($model, 'file');
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -120,7 +129,7 @@ class ItemController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Item::findOne($id)) !== null) {
+        if (($model = Item::find()->with(['files'])->where(['id' => $id])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
