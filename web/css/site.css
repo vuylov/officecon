@@ -89,3 +89,12 @@ a.desc:after {
     padding: 10px 20px;
     margin: 0 0 15px 0;
 }
+div.image-item{
+    position: relative;
+    display: inline-block;
+}
+a.delete-image{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
