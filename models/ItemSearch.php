@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\ProductItem;
+use app\models\Item;
 
 /**
- * ProductItemSearch represents the model behind the search form about `app\models\ProductItem`.
+ * ItemSearch represents the model behind the search form about `app\models\Item`.
  */
-class ProductItemSearch extends ProductItem
+class ItemSearch extends Item
 {
     /**
      * @inheritdoc
@@ -42,13 +42,17 @@ class ProductItemSearch extends ProductItem
      */
     public function search($params)
     {
-        $query = ProductItem::find();
+        $query = Item::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        if (!($this->load($params) && $this->validate())) {
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to any records when validation fails
+            // $query->where('0=1');
             return $dataProvider;
         }
 

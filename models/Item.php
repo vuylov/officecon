@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-
+use yii\db\ActiveRecord;
 /**
  * This is the model class for table "productItem".
  *
@@ -20,7 +20,7 @@ use Yii;
  * @property Product $product
  * @property ProductPrice[] $productPrices
  */
-class ProductItem extends \yii\db\ActiveRecord
+class Item extends ActiveRecord
 {
     const FILE_TYPE = 'item';
     /**
@@ -30,7 +30,6 @@ class ProductItem extends \yii\db\ActiveRecord
     {
         return 'productItem';
     }
-
     /**
      * @inheritdoc
      */
@@ -84,5 +83,13 @@ class ProductItem extends \yii\db\ActiveRecord
     public function getProductPrices()
     {
         return $this->hasMany(ProductPrice::className(), ['productItem_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFiles()
+    {
+        return $this->hasMany(File::className(), ['fid' => 'id'])->where(['type' => self::FILE_TYPE]);
     }
 }

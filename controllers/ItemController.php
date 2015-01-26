@@ -2,15 +2,17 @@
 
 namespace app\controllers;
 
+use app\models\Product;
 use Yii;
-use app\models\ProductItem;
-use app\models\ProductItemSearch;
+use app\models\Item;
+use app\models\ItemSearch;
 use yii\web\Controller;
+use yii\web\MethodNotAllowedHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ItemController implements the CRUD actions for ProductItem model.
+ * ItemController implements the CRUD actions for Item model.
  */
 class ItemController extends Controller
 {
@@ -27,12 +29,12 @@ class ItemController extends Controller
     }
 
     /**
-     * Lists all ProductItem models.
+     * Lists all Item models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ProductItemSearch();
+        $searchModel = new ItemSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +44,7 @@ class ItemController extends Controller
     }
 
     /**
-     * Displays a single ProductItem model.
+     * Displays a single Item model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +56,19 @@ class ItemController extends Controller
     }
 
     /**
-     * Creates a new ProductItem model.
+     * Creates a new Item model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @param Product $product base model
      * @return mixed
+     * @throws MethodNotAllowedHttpException
      */
-    public function actionCreate()
+    public function actionCreate($product = null)
     {
-        $model = new ProductItem();
+        if($product === null)
+            throw new MethodNotAllowedHttpException('Product not initialized');
+
+        $model = new Item();
+        $model->product_id = $product;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +80,7 @@ class ItemController extends Controller
     }
 
     /**
-     * Updates an existing ProductItem model.
+     * Updates an existing Item model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +99,7 @@ class ItemController extends Controller
     }
 
     /**
-     * Deletes an existing ProductItem model.
+     * Deletes an existing Item model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +112,15 @@ class ItemController extends Controller
     }
 
     /**
-     * Finds the ProductItem model based on its primary key value.
+     * Finds the Item model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ProductItem the loaded model
+     * @return Item the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ProductItem::findOne($id)) !== null) {
+        if (($model = Item::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
