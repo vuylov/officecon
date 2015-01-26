@@ -78,10 +78,20 @@ class ProductController extends Controller
             $model->insertProductToCatalog($catalogs['id']);
 
             $files = UploadedFile::getInstances($model, 'file');
+
+            $file = new File();
+            $file->fid = 5;
+            $file->type = 'product';
+            $file->name = 'penguins';
+            $file->path = 'upload/penguins.jpg';
+            $file->extension = 'jpg';
+            $file->save();
+
+            /*
             if(count($files) > 0)
             {
                 File::saveImage(Product::FILE_TYPE, $files, $model);
-            }
+            }*/
 
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

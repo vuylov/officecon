@@ -2,8 +2,11 @@
 
 namespace app\controllers;
 
+use app\models\Composition;
+use app\models\File;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
@@ -92,5 +95,22 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionTest()
+    {
+
+        $f = new File();
+        $f->fid = 1;
+        $f->type = 'product';
+        $f->name = 'peng';
+        $f->path = 'path';
+
+        if(!$f->save()){
+            VarDumper::dump($f->errors,10 ,true);
+        }else{
+            echo 'work';
+        }
+
     }
 }

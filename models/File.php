@@ -81,14 +81,17 @@ class File extends \yii\db\ActiveRecord
             $dbFile->path       = 'upload/'.$rName.'.'.$file->extension;
             $dbFile->extension  = $file->extension;
 
-            VarDumper::dump($dbFile, 10, true);
+            $dbFile->save(false);
+
+            /*VarDumper::dump($dbFile, 10, true);
 
             if($dbFile->save()){
                 $file->saveAs($dbFile->path);
             }
             else{
                 VarDumper::dump($dbFile->errors, 10, true);
-            }
+            }*/
+            unset($dbFile);
         }
     }
 
