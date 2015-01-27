@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
         <?=Html::a('Добавить цену',['price/create', 'item' => $model->id], ['class' => 'btn btn-success']);?>
+        <?=Html::a('Вернуться к продукту',['product/view', 'id' => $model->product_id],['class' => 'btn btn-success']);?>
     </p>
 
     <?= DetailView::widget([

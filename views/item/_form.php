@@ -76,6 +76,7 @@ use vova07\imperavi\Widget;
 
     <div class="form-group pull-right">
         <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Изменить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?=Html::a('Отмена',['item/view', 'id' => $model->id],['class' => 'btn btn-primary']);?>
     </div>
 
     <?php ActiveForm::end(); ?>

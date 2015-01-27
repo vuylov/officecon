@@ -24,7 +24,7 @@ class ItemController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['post'],
+                    'delete' => ['post', 'get'],
                 ],
             ],
             'access'    => [
@@ -127,7 +127,7 @@ class ItemController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['product/view', 'id' => $this->product_id]);
     }
 
     /**
