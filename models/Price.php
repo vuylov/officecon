@@ -33,8 +33,8 @@ class Price extends ActiveRecord
     public function rules()
     {
         return [
-            [['productItem_id', 'currency_id'], 'required'],
-            [['productItem_id', 'currency_id'], 'integer'],
+            [['productItem_id', 'currency_id'], 'required', 'message' => Yii::t('app', 'Поле обязательное для заполнения')],
+            [['productItem_id', 'currency_id'], 'integer', 'message' => Yii::t('app', 'Значение должно быть числовым')],
             [['value'], 'number'],
             [['cause'], 'string']
         ];
@@ -47,10 +47,10 @@ class Price extends ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'productItem_id' => Yii::t('app', 'Product Item ID'),
-            'currency_id' => Yii::t('app', 'Currency ID'),
-            'value' => Yii::t('app', 'Value'),
-            'cause' => Yii::t('app', 'Cause'),
+            'productItem_id' => Yii::t('app', 'Артикул'),
+            'currency_id' => Yii::t('app', 'Валюта'),
+            'value' => Yii::t('app', 'Значение'),
+            'cause' => Yii::t('app', 'Причина'),
         ];
     }
 
@@ -65,7 +65,7 @@ class Price extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProductItem()
+    public function getItem()
     {
         return $this->hasOne(Item::className(), ['id' => 'productItem_id']);
     }

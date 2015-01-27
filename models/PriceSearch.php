@@ -10,7 +10,7 @@ use app\models\ProductPrice;
 /**
  * ProductPriceSearch represents the model behind the search form about `app\models\ProductPrice`.
  */
-class ProductPriceSearch extends ProductPrice
+class PriceSearch extends Price
 {
     /**
      * @inheritdoc
@@ -42,7 +42,7 @@ class ProductPriceSearch extends ProductPrice
      */
     public function search($params)
     {
-        $query = ProductPrice::find();
+        $query = Price::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

@@ -15,7 +15,7 @@ class m150115_120710_create_table_productPrice extends Migration
             'cause'         => Schema::TYPE_TEXT
         ]);
 
-        $this->addForeignKey('pPriceItemFK', 'productPrice', 'productItem_id', 'productItem', 'id', 'restrict', 'cascade');
+        $this->addForeignKey('pPriceItemFK', 'productPrice', 'productItem_id', 'productItem', 'id', 'cascade', 'cascade');
         $this->addForeignKey('pCurrencyFK', 'productPrice', 'currency_id', 'currency', 'id', 'restrict', 'cascade');
 
     }
