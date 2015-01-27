@@ -55,12 +55,26 @@ $this->params['breadcrumbs'][] = $this->title;
             'create_at',
             'deactivate_at',
             'producer',
-            [
-                'label' => 'Артикулы',
-                'value' => implode(', ', \yii\helpers\ArrayHelper::map($model->items, 'id', 'article'))
-            ],
         ],
     ]) ?>
+
+    <?php if(count($model->items) > 0):?>
+        <h2>Артикулы</h2>
+        <table class="table table-bordered">
+            <thead><th>Артикулы</th><th>Управление</th></thead>
+            <tbody>
+            <?php foreach($model->items as $item):?>
+                <tr>
+                    <td><?=$item->article?></td>
+                    <td>
+                        <?=Html::a('Изменить',['item/update', 'id' => $item->id],['class' => 'btn btn-primary']);?>
+                        <?=Html::a('Удалить',['item/delete', 'id' => $item->id],['class' => 'btn btn-danger']);?>
+                    </td>
+                </tr>
+            <?php endforeach;?>
+            </tbody>
+        </table>
+    <?php endif;?>
 
     <?php if(count($model->files) > 0):?>
     <div>
