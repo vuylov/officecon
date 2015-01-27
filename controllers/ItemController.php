@@ -11,6 +11,7 @@ use yii\web\Controller;
 use yii\web\MethodNotAllowedHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * ItemController implements the CRUD actions for Item model.
@@ -25,6 +26,15 @@ class ItemController extends Controller
                 'actions' => [
                     'delete' => ['post'],
                 ],
+            ],
+            'access'    => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@']
+                    ]
+                ]
             ],
         ];
     }

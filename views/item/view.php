@@ -48,14 +48,23 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php if(count($model->prices) > 0): ?>
     <div class="item-prices">
         <h2>Цены</h2>
-        <?php foreach($model->prices as $price):?>
-            <div>
-                <?=$price->value.'('.$price->cause.')';?>
-            </div>
-        <?php endforeach;?>
+        <table class="table table-bordered">
+            <thead><tr><th>Цена</th><th>Валюта</th><th>Пояснение</th><th>Управление</th></tr></thead>
+                <tbody>
+                <?php foreach($model->prices as $price):?>
+                    <tr>
+                        <td><?=$price->value?></td><td><?=$price->currency->name?></td><td><?=$price->cause?></td>
+                        <td>
+                            <?=Html::a('Изменить', ['price/update', 'id' => $price->id],['class' => 'btn btn-primary']);?>
+                            <?=Html::a('Удалить',['price/delete', 'id' => $price->id],['class' => 'btn btn-danger'])?>
+                        </td>
+                    </tr>
+                <?php endforeach;?>
+                </tbody>
+        </table>
     </div>
     <?php else:?>
-        <div>Цены не загружены</div>
+        <div class="alert alert-danger">Цены не загружены</div>
     <?php endif;?>
 
     <?php if(count($model->files) > 0):?>

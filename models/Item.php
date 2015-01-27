@@ -55,7 +55,7 @@ class Item extends ActiveRecord
         return [
             'id' => 'ID',
             'product_id' => 'Продукт',
-            'article' => 'Артикль',
+            'article' => 'Артикул',
             'size' => 'Размер',
             'weight' => 'Вес',
             'volume' => 'Объем',
