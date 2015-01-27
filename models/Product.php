@@ -131,6 +131,14 @@ class Product extends \yii\db\ActiveRecord
             ->where(['type' => self::FILE_TYPE]);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCompositions()
+    {
+        return $this->hasMany(Composition::className(), ['id' => 'product_id'])->viaTable('cmpositionItem', ['product_id' => 'id']);
+    }
+
      /**
      * override beforeSave()
      */

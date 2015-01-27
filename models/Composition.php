@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-
+use yii\db\ActiveRecord;
 /**
  * This is the model class for table "composition".
  *
@@ -16,9 +16,10 @@ use Yii;
  * @property Manufacturer $manufacturer
  * @property CompositionItem[] $compositionItems
  */
-class Composition extends \yii\db\ActiveRecord
+class Composition extends ActiveRecord
 {
     const FILE_TYPE = 'composition';
+    public $file; //use for upload images
     /**
      * @inheritdoc
      */
@@ -36,6 +37,7 @@ class Composition extends \yii\db\ActiveRecord
             [['name', 'manufacturer_id'], 'required'],
             [['price'], 'number'],
             [['manufacturer_id'], 'integer'],
+            [['file'], 'safe'],
             [['name', 'description'], 'string', 'max' => 255]
         ];
     }
@@ -50,6 +52,7 @@ class Composition extends \yii\db\ActiveRecord
             'name' => Yii::t('app', 'Название'),
             'description' => Yii::t('app', 'Описание'),
             'price' => Yii::t('app', 'Цена'),
+            'file' => Yii::t('app', 'Изображение для загрузки'),
             'manufacturer_id' => Yii::t('app', 'Поставщик'),
         ];
     }
@@ -68,6 +71,11 @@ class Composition extends \yii\db\ActiveRecord
     public function getCompositionItems()
     {
         return $this->hasMany(CompositionItem::className(), ['composition_id' => 'id']);
+    }
+
+    public function getProducts()
+    {
+        return $this->hasMany(Product::className(), ['id' => 'composition_id'])->viaTable('compositionItem', ['composition_id' => 'id']);
     }
 
     public function getBaseFileType()

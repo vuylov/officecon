@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Composition */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Compositions', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Комплектации', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="composition-view">
@@ -15,14 +15,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы увереные что хотите удалить компоновку?',
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a('Добавить продукт',[''],['']);?>
     </p>
 
     <?= DetailView::widget([
@@ -35,5 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'manufacturer_id',
         ],
     ]) ?>
+
+
 
 </div>

@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Composition;
 use app\models\CompositionSearch;
+use app\models\File;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -63,6 +64,8 @@ class CompositionController extends Controller
         $model = new Composition();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            File::saveUploadedImage($model, 'file');
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
