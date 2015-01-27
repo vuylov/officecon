@@ -11,7 +11,9 @@ use Yii;
  * @property string $name
  * @property string $description
  * @property double $price
+ * @property integer $manufacturer_id
  *
+ * @property Manufacturer $manufacturer
  * @property CompositionItem[] $compositionItems
  */
 class Composition extends \yii\db\ActiveRecord
@@ -31,8 +33,9 @@ class Composition extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name', 'manufacturer_id'], 'required'],
             [['price'], 'number'],
+            [['manufacturer_id'], 'integer'],
             [['name', 'description'], 'string', 'max' => 255]
         ];
     }
@@ -43,11 +46,20 @@ class Composition extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
-            'price' => 'Price',
+            'id' => Yii::t('app', 'ID'),
+            'name' => Yii::t('app', 'Название'),
+            'description' => Yii::t('app', 'Описание'),
+            'price' => Yii::t('app', 'Цена'),
+            'manufacturer_id' => Yii::t('app', 'Поставщик'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getManufacturer()
+    {
+        return $this->hasOne(Manufacturer::className(), ['id' => 'manufacturer_id']);
     }
 
     /**
