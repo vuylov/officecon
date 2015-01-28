@@ -136,7 +136,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getCompositions()
     {
-        return $this->hasMany(Composition::className(), ['id' => 'product_id'])->viaTable('cmpositionItem', ['product_id' => 'id']);
+        return $this->hasMany(Composition::className(), ['id' => 'product_id'])->viaTable('compositionItem', ['product_id' => 'id']);
     }
 
      /**

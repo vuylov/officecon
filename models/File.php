@@ -108,7 +108,6 @@ class File extends \yii\db\ActiveRecord
      */
     public static function deleteRelatedFiles(ActiveRecord $model)
     {
-        //self::deleteAll('fid = :fid AND type = :type', [':fid' => $model->id, ':type' => $model->baseFileType]);
         $files = File::find()->where(['fid' => $model->id, 'type' => $model->baseFileType])->all();
         $count = count($files);
         if($count > 0){
