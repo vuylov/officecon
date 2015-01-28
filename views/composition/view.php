@@ -23,20 +23,50 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('Добавить продукт',[''],['']);?>
+        <?= Html::a('Добавить продукт',['add', 'id' => $model->id],['class' => 'btn btn-success']);?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'name',
-            'description',
+            'description:html',
             'price',
-            'manufacturer_id',
+            [
+                'label' => 'Поставщик',
+                'value' => $model->manufacturer->name
+            ]
         ],
     ]) ?>
 
+    <?php if(count($model->compositionItems) > 0):?>
+        <table class="table table-bordered">
+            <thead>
+                <tr><th>Артикул</th><th>Количество</th><th>Управление</th></tr>
+            </thead>
+            <tbody>
+            <?php foreach($model->compositionItems as $item):?>
+                <tr>
+                    <td><?=$item->article->article?></td>
+                    <td><?=$item->amount?></td>
+                    <td>
+                        <?=Html::a('Изменить',['composition/iupdate', 'id' => $item->id],['class' => 'btn btn-primary']);?>
+                        <?=Html::a('Удалить',['composition/idelete', 'id' => $item->id],[
+                            'class'  => 'btn btn-danger',
+                            'data'  => [
+                                'confirm'   => 'Вы уверены, что хотите удалить артикул?',
+                                'method'    => 'post'
+                            ]
+                        ]);?>
+                    </td>
+                </tr>
+            <?php endforeach;?>
+            </tbody>
+        </table>
+    <?php else:?>
+        <div class="alert-danger">Артикулы в компановку не добавлены</div>
+    <?php endif;?>
 
 
 </div>

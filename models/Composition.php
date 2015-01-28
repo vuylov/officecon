@@ -78,8 +78,27 @@ class Composition extends ActiveRecord
         return $this->hasMany(Product::className(), ['id' => 'composition_id'])->viaTable('compositionItem', ['composition_id' => 'id']);
     }
 
+    public function getFiles()
+    {
+        return $this->hasMany(File::className(), ['fid' => 'id'])
+            ->where(['type' => self::FILE_TYPE]);
+    }
+
     public function getBaseFileType()
     {
         return self::FILE_TYPE;
+    }
+
+    /**
+     * override beforeDelete
+     */
+    public function beforeDelete()
+    {
+        if(parent::beforeDelete())
+        {
+            File::deleteRelatedFiles($this);
+            return true;
+        }
+        return false;
     }
 }

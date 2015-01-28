@@ -38,6 +38,23 @@ use kartik\file\FileInput;
 
     <?= $form->field($model, 'price')->textInput() ?>
 
+    <?php if(count($model->files) > 0):?>
+        <div class="product-images">
+            <?php foreach($model->files as $img):?>
+                <div class="image-item">
+                    <?=Html::img('@web/'.$img->path, ['id' => 'file-'.$img->id, 'class' => 'file-preview-image', 'alt' => $img->name, 'data' => $img->id]);?>
+                    <?=Html::a('Удалить', ['file/delete', 'id' => $img->id],[
+                        'class' => 'btn btn-danger delete-image',
+                        'data' => [
+                            'confirm' => 'Вы уверены что хотите удалить изображение',
+                            'method' => 'post',
+                        ],
+                    ]);?>
+                </div>
+            <?php endforeach;?>
+        </div>
+    <?php endif;?>
+
     <?php echo $form->field($model, 'file[]')->widget(FileInput::classname(),[
         'options'       => [
             'accept' => 'image/*',
@@ -54,6 +71,7 @@ use kartik\file\FileInput;
 
     <div class="form-group pull-right">
         <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Изменить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?=Html::a('Отмена',['composition/view', 'id' => $model->id],['class' => 'btn btn-primary']);?>
     </div>
 
     <?php ActiveForm::end(); ?>
