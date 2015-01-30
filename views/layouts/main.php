@@ -23,24 +23,46 @@ AppAsset::register($this);
 <body>
 
 <?php $this->beginBody() ?>
-    <div class="wrap">
-        <?php
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="<?=Yii::getAlias('@web');?>">
+                        <img src="<?=Yii::$app->homeUrl?>img/logo.png">
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <div style="text-align: center; font-weight: bold; font-size: 20px">8 (8442) 65-00-85</div>
+                    <div style="text-align: center;font-size: 16px">+7 (902) 362-57-94</div>
+                </div>
+                <div class="col-md-4">
+                    <div>ул. Командира Рудь 1"А"</div>
+                    <div>Смотреть на карте</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="wrap">
+            <?php
             NavBar::begin([
-                'brandLabel' => 'ОфисКон',
-                'brandUrl' => Yii::$app->homeUrl,
+                //'brandLabel' => 'ОфисКон',
+                //'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
+                    'class' => 'navbar-inverse green-layout',
                 ],
             ]);
             echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
+                'options'           => ['class' => 'navbar-nav', 'id' => 'header-menu'],
+                'activateParents'   => true,
                 'items' => [
                     ['label' => 'Главная', 'url' => ['/site/index']],
-                    ['label' => 'Каталог', 'url' => ['/catalog/index']],
-                    ['label' => 'Продукция', 'url' => ['/product/index']],
+                    ['label' => 'Каталог', 'url' => ['catalog/index']],
+                    ['label' => 'Дизайн-проекты', 'url' => ['/designs/index']],
+                    ['label' => 'Портфолио', 'url' => ['/projects/index']],
                     ['label' => 'О компании', 'url' => ['/site/about']],
                     ['label' => 'Контакты', 'url' => ['/site/contact']],
-                    ['label' => 'Пользователи', 'url' => ['/user/index']],
+
                     ['label' => 'Компоновки', 'url' => ['composition/index']],
                     Yii::$app->user->isGuest ?
                         ['label' => 'Войти', 'url' => ['/site/login']] :
@@ -50,21 +72,17 @@ AppAsset::register($this);
                 ],
             ]);
             NavBar::end();
-        ?>
-        <div class="container">
-            <?= Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                'homeLink' => ['label' => 'Главная', 'url' => Yii::$app->homeUrl],
-            ]) ?>
-            <?= $content ?>
+            ?>
+            <div class="content">
+                <?= $content ?>
+            </div>
         </div>
+        <footer class="footer">
+            <div class="container">
+                <p class="pull-left">&copy; ОфисКон <?= date('Y') ?></p>
+            </div>
+        </footer>
     </div>
-
-    <footer class="footer">
-        <div class="container">
-            <p class="pull-left">&copy; ОфисКон <?= date('Y') ?></p>
-        </div>
-    </footer>
 <?php $this->endBody() ?>
 </body>
 </html>

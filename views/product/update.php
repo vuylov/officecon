@@ -6,9 +6,10 @@ use yii\helpers\Html;
 /* @var $model app\models\Product */
 
 $this->title = 'Изменение: ' . ' ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Каталог', 'url' => ['catalog/index']];
+$this->params['breadcrumbs'][] = ['label' => $model->catalog->name, 'url' => ['catalog/view', 'id' => $model->catalog->id]];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Изменение';
 ?>
 <div class="product-update">
 
@@ -16,7 +17,6 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model'     => $model,
-        'catalogChecked'   => $catalogChecked
     ]) ?>
 
 </div>

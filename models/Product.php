@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\db\Expression;
 use app\models\Item;
+use app\models\Composition;
 use yii\web\MethodNotAllowedHttpException;
 use yii\helpers\VarDumper;
 
@@ -46,10 +47,10 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['manufacturer_id', 'name'], 'required', 'message' => 'не может быть пустым'],
-            [['manufacturer_id'], 'integer'],
+            [['manufacturer_id', 'name', 'catalog_id', 'keywords', 'description_seo'], 'required', 'message' => 'не может быть пустым'],
+            [['manufacturer_id', 'catalog_id'], 'integer'],
             [['description'], 'string'],
-            [['create_at', 'deactivate_at', 'active', 'parent_id','user_id', 'description', 'file'], 'safe'],
+            [['create_at', 'deactivate_at', 'active', 'parent_id','user_id', 'description', 'file', 'article', 'weight', 'volume', 'amount','price','type_id'], 'safe'],
             [['name', 'producer'], 'string', 'max' => 255]
         ];
     }
@@ -63,6 +64,7 @@ class Product extends \yii\db\ActiveRecord
             'id'                => Yii::t('app', 'ID'),
             'parent_id'         => Yii::t('app', 'Относится к'),
             'user_id'           => Yii::t('app', 'Автор'),
+            'catalog_id'        => Yii::t('app', 'Каталог'),
             'manufacturer_id'   => Yii::t('app', 'Поставщик'),
             'name'              => Yii::t('app', 'Название'),
             'description'       => Yii::t('app', 'Описание'),
@@ -70,7 +72,16 @@ class Product extends \yii\db\ActiveRecord
             'create_at'         => Yii::t('app', 'Создано'),
             'deactivate_at'     => Yii::t('app', 'Деактивировано'),
             'producer'          => Yii::t('app', 'Производство'),
-            'file'              => Yii::t('app', 'Изображения для загрузки')
+            'file'              => Yii::t('app', 'Изображения для загрузки'),
+            'keywords'          => Yii::t('app', 'Ключевые слова для SEO'),
+            'description_seo'   => Yii::t('app', 'Описание для SEO'),
+            'article'           => Yii::t('app', 'Артикул'),
+            'size'              => Yii::t('app', 'Размеры'),
+            'weight'            => Yii::t('app', 'Масса'),
+            'volume'            => Yii::t('app', 'Объем'),
+            'amount'            => Yii::t('app', 'Количество элементов в упаковке'),
+            'price'             => Yii::t('app', 'Цена'),
+            'type_id'           => Yii::t('app', 'Тип'),
         ];
     }
 
@@ -90,28 +101,13 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProductToCatalogs()
-    {
-        return $this->hasMany(ProductToCatalog::className(), ['product_id' => 'id']);
-    }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCatalogs()
+    public function getCatalog()
     {
-        return $this->hasMany(Catalog::className(), ['id' => 'catalog_id'])->viaTable('productToCatalog', ['product_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getItems()
-    {
-        return $this->hasMany(Item::className(), ['product_id' => 'id']);
+        return $this->hasOne(Catalog::className(), ['id' => 'catalog_id']);
     }
 
     /**
@@ -120,6 +116,22 @@ class Product extends \yii\db\ActiveRecord
     public function getParent()
     {
         return $this->hasOne(Product::className(), ['id' => 'parent_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getType()
+    {
+        return $this->hasOne(Type::className(), ['id' => 'type_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPrices()
+    {
+        return $this->hasMany(Price::className(), ['product_id' => 'id']);
     }
 
     /**
@@ -136,7 +148,23 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getCompositions()
     {
-        return $this->hasMany(Composition::className(), ['id' => 'product_id'])->viaTable('compositionItem', ['product_id' => 'id']);
+        return $this->hasMany(Composition::className(), ['product_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCompositionsItem()
+    {
+        return $this->hasMany(CompositionItem::className(), ['product_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getChilds()
+    {
+        return $this->hasMany(Product::className(), ['parent_id' => 'id']);
     }
 
      /**
@@ -167,55 +195,6 @@ class Product extends \yii\db\ActiveRecord
             return true;
         }
         return false;
-    }
-
-    /**
-     * Save relations in junction table productToCatalog
-     * @param Product $product product model
-     * @param Catalog $catalogs many catalog
-     * @throws  MethodNotAllowedHttpException
-     * @return  mixed
-     */
-    public function insertProductToCatalog(array $catalogs)
-    {
-        $db     = Yii::$app->db;
-        $data   = $this->prepareData($catalogs);
-
-        $result = $db->createCommand()->batchInsert('productToCatalog', ['product_id', 'catalog_id'], $data)->execute();
-        if(!$result)
-            throw new MethodNotAllowedHttpException('Not insert rows in productToCatalog table');
-    }
-
-    /**
-     * Delete relations in junction table productToCatalog
-     */
-    public function deleteProductToCatalog()
-    {
-        $db     = Yii::$app->db;
-        $db->createCommand()->delete('productToCatalog', ['product_id' => $this->id])->execute();
-    }
-
-    /**
-     * Prepare data for insertProductToCatalog mathod
-     */
-    private function prepareData(array $catalogs)
-    {
-        $ar = [];
-        foreach($catalogs as $catalogId)
-        {
-            $ar[] = [$this->id, (int)$catalogId];
-        }
-        return $ar;
-    }
-
-    /**
-     * Deactivate product in system. Hide product from front site
-     */
-    private function Deactivate()
-    {
-        $this->active = 0;
-        $this->deactivate_at = new Expression('NOW()');
-        $this->save();
     }
 
     public function getBaseFileType()

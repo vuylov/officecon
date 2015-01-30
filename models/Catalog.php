@@ -74,19 +74,12 @@ class Catalog extends \yii\db\ActiveRecord
         return $this->hasMany(Catalog::className(), ['parent_id' => 'id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProductToCatalogs()
-    {
-        return $this->hasMany(ProductToCatalog::className(), ['catalog_id' => 'id']);
-    }
 
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getProducts()
     {
-        return $this->hasMany(Product::className(), ['id' => 'product_id'])->viaTable('productToCatalog', ['catalog_id' => 'id']);
+        return $this->hasMany(Product::className(), ['catalog_id' => 'id']);
     }
 }

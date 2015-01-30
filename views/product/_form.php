@@ -5,6 +5,7 @@ use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use app\models\Product;
 use app\models\Catalog;
+use app\models\Type;
 use app\models\Manufacturer;
 use vova07\imperavi\Widget;
 use kartik\file\FileInput;
@@ -22,6 +23,10 @@ use kartik\file\FileInput;
         ]
     ]); ?>
 
+    <?= $form->field($model, 'catalog_id')->dropDownList(ArrayHelper::map(Catalog::find()->all(), 'id', 'name'), [
+        'readonly' => true
+    ]);?>
+
     <?= $form->field($model, 'parent_id')->dropDownList(ArrayHelper::map(Product::find()->where('parent_id IS NULL')->all(), 'id', 'name'), [
         'prompt'    => 'Добавить в корень'
     ]); ?>
@@ -29,9 +34,26 @@ use kartik\file\FileInput;
     <?= $form->field($model, 'manufacturer_id')->dropDownList(ArrayHelper::map(Manufacturer::find()->all(), 'id', 'name'), [
         'prompt'    => 'Укажите поставщика'
     ]); ?>
-    <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'producer')->textInput(['maxlength' => 255]) ?>
+    <?= $form->field($model, 'type_id')->dropDownList(ArrayHelper::map(Type::find()->all(), 'id', 'name'), [
+        'prompt'    => 'Укажите тип'
+    ])->hint('Укажите тип (опционально)'); ?>
+
+    <?= $form->field($model, 'name')->textInput(['maxlength' => 255])->hint('Укажите нимаенование продукта'); ?>
+
+    <?= $form->field($model, 'producer')->textInput(['maxlength' => 255])->hint('Укажите страну производителя'); ?>
+
+    <?= $form->field($model, 'article')->textInput(['maxlength' => 255])->hint('Укажите артикул (опционально)'); ?>
+
+    <?= $form->field($model, 'size')->textInput(['maxlength' => 255])->hint('Укажите размер (опционально)'); ?>
+
+    <?= $form->field($model, 'weight')->textInput(['maxlength' => 255])->hint('Укажите вес (опционально)'); ?>
+
+    <?= $form->field($model, 'volume')->textInput(['maxlength' => 255])->hint('Укажите объем (опционально)'); ?>
+
+    <?= $form->field($model, 'amount')->textInput(['maxlength' => 255])->hint('Укажите количество в упаковке (опционально)'); ?>
+
+    <?= $form->field($model, 'price')->textInput(['maxlength' => 255])->hint('Укажите цену (опционально)'); ?>
 
     <?= $form->field($model, 'description')->widget(Widget::className(),[
         'settings'  => [
@@ -42,15 +64,8 @@ use kartik\file\FileInput;
         ]
     ]);?>
 
-    <?php if($model->isNewRecord):?>
-        <?= $form->field($catalog, 'id')->checkboxList(ArrayHelper::map(Catalog::find()->all(), 'id', 'name'),[
-            'separator' => '<br>'
-        ]); ?>
-    <?php else:?>
-        <?= Html::checkboxList('Catalog[id]', $catalogChecked, ArrayHelper::map(Catalog::find()->all(), 'id', 'name'), [
-            'separator' => '<br>'
-        ]);?>
-    <?php endif;?>
+    <?= $form->field($model, 'keywords')->textarea();?>
+    <?= $form->field($model, 'description_seo')->textarea();?>
 
     <?php if(count($model->files) > 0):?>
         <div class="product-images">
@@ -68,7 +83,7 @@ use kartik\file\FileInput;
             <?php endforeach;?>
         </div>
     <?php endif;?>
-
+    <div class="clearfix"></div>
     <?php echo $form->field($model, 'file[]')->widget(FileInput::classname(),[
         'options'       => [
             'accept' => 'image/*',
@@ -84,7 +99,8 @@ use kartik\file\FileInput;
     ?>
 
     <div class="form-group pull-right">
-        <?= Html::submitButton($model->isNewRecord ? 'Добваить' : 'Изменить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Изменить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::a('Отмена',['catalog/view', 'id' => $model->catalog->id],['class' => 'btn btn-primary']);?>
     </div>
 
     <?php ActiveForm::end(); ?>

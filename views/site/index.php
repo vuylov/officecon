@@ -1,51 +1,49 @@
 <?php
 /* @var $this yii\web\View */
-$this->title = 'My Yii Application';
+use app\assets\DivasSliderAsset;
+
+$this->title = 'Офискон: конструируем офинсое пространство';
+DivasSliderAsset::register($this);
 ?>
 <div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+    <div class="sliders">
+        <div id="slider" class="divas-slider">
+            <ul class="divas-slide-container">
+                <li class="divas-slide"><img src="<?=Yii::$app->homeUrl?>img/slides/placeholder.gif" alt="" data-src="<?=Yii::$app->homeUrl?>img/slides/slide1.jpg" /></li>
+                <li class="divas-slide"><img src="<?=Yii::$app->homeUrl?>img/slides/placeholder.gif" alt="" data-src="<?=Yii::$app->homeUrl?>img/slides/slide2.jpg" /></li>
+                <li class="divas-slide"><img src="<?=Yii::$app->homeUrl?>img/slides/placeholder.gif" alt="" data-src="<?=Yii::$app->homeUrl?>img/slides/slide3.jpg" /></li>
+                <li class="divas-slide"><img src="<?=Yii::$app->homeUrl?>img/slides/placeholder.gif" alt="" data-src="<?=Yii::$app->homeUrl?>img/slides/slide4.jpg" /></li>
+                <li class="divas-slide"><img src="<?=Yii::$app->homeUrl?>img/slides/placeholder.gif" alt="" data-src="<?=Yii::$app->homeUrl?>img/slides/slide5.jpg" /></li>
+            </ul>
+            <div class="divas-navigation">
+                <span class="divas-prev">&nbsp;</span>
+                <span class="divas-next">&nbsp;</span>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+            <div class="divas-controls">
+                <span class="divas-start"><i class="fa fa-play"></i></span>
+                <span class="divas-stop"><i class="fa fa-pause"></i></span>
             </div>
         </div>
+    </div>
 
+    <div class="container">
+        <div class="section-header-line">
+            <div class="section-header">Мы работаем так</div>
+        </div>
+        <ul class="list-inline work">
+            <li class="work-phone"><img src="<?=Yii::$app->homeUrl?>img/phone.png" width="100" class="img-responsive"></li>
+            <li class="work-divider"><img src="<?=Yii::$app->homeUrl?>img/pointer.png" class="img-responsive"></li>
+            <li class="work-phone"><img src="<?=Yii::$app->homeUrl?>img/lamp.png" width="100" class="img-responsive"></li>
+            <li class="work-divider"><img src="<?=Yii::$app->homeUrl?>img/pointer.png"  class="img-responsive"></li>
+            <li class="work-phone"><img src="<?=Yii::$app->homeUrl?>img/demonstrate.png" width="100" class="img-responsive"></li>
+            <li class="work-divider"><img src="<?=Yii::$app->homeUrl?>img/pointer.png" class="img-responsive"></li>
+            <li class="work-phone"><img src="<?=Yii::$app->homeUrl?>img/hands.png" width="100" class="img-responsive"></li>
+            <li class="work-divider"><img src="<?=Yii::$app->homeUrl?>img/pointer.png" class="img-responsive"></li>
+            <li class="work-phone"><img src="<?=Yii::$app->homeUrl?>img/truck.png" class="img-responsive"></li>
+        </ul>
+        <div class="clearfix"></div>
+        <div class="section-header-line">
+            <div class="section-header">Наши заказчики</div>
+        </div>
     </div>
 </div>

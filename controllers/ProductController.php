@@ -12,6 +12,7 @@ use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use yii\web\UploadedFile;
 
 /**
@@ -19,6 +20,7 @@ use yii\web\UploadedFile;
  */
 class ProductController extends Controller
 {
+    public $layout = 'catalog';
     public function behaviors()
     {
         return [
@@ -27,6 +29,16 @@ class ProductController extends Controller
                 'actions' => [
                     'delete' => ['post'],
                 ],
+            ],
+            'access'    => [
+                'class' => AccessControl::className(),
+                'only'  => ['create', 'update', 'delete'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@']
+                    ]
+                ]
             ],
         ];
     }
@@ -54,32 +66,37 @@ class ProductController extends Controller
     public function actionView($id)
     {
         $model      = $this->findModel($id);
-        $catalogs   = ArrayHelper::getColumn($model->catalogs, 'name');
 
+        $this->redirect(['catalog/view', 'id' => $model->catalog->id, 'product' => $model->id]);
+        /*
         return $this->render('view', [
             'model'     => $model,
-            'catalogs'  => $catalogs
-        ]);
+        ]);*/
     }
 
     /**
      * Creates a new Product model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @throws NotFoundHttpException
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($catalog = null, $product = null)
     {
-        $model      = new Product();
-        $catalog    = new Catalog();
+        if($catalog === null)
+            throw new NotFoundHttpException('Catalog not found');
+
+        $model              = new Product();
+        $catalog            = Catalog::findOne($catalog);
+        $model->catalog_id  = $catalog->id;
+
+        if($product !== null)
+            $model->parent_id = $product;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            $catalogs = Yii::$app->request->post('Catalog');
-            $model->insertProductToCatalog($catalogs['id']);
-
             File::saveUploadedImage($model, 'file');
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['catalog/view', 'id' => $catalog->id]);
         } else {
             return $this->render('create', [
                 'model'     => $model,
@@ -96,21 +113,16 @@ class ProductController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model              = $this->findModel($id);
-        $catalogChecked     = ArrayHelper::getColumn($model->catalogs, 'id');
+        $model              = Product::find()->with(['catalog', 'files'])->where('id = :id', ['id' => $id])->one();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model->deleteProductToCatalog();
-            $catalogs = Yii::$app->request->post('Catalog');
-            $model->insertProductToCatalog($catalogs['id']);
 
             File::saveUploadedImage($model, 'file');
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['catalog/view', 'id' => $model->catalog->id, 'product' => $model->id]);
         } else {
             return $this->render('update', [
                 'model'     => $model,
-                'catalogChecked'   => $catalogChecked
             ]);
         }
     }
@@ -137,7 +149,7 @@ class ProductController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Product::find()->where(['id' => $id])->with(['files', 'items'])->one()) !== null) {
+        if (($model = Product::find()->where(['id' => $id])->with(['files', 'prices', 'catalog'])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -9,16 +9,17 @@ body {
     margin: 0 auto -60px;
     padding: 0 0 60px;
 }
-
+/*
 .wrap > .container {
     padding: 70px 15px 20px;
 }
-
+*/
 .footer {
     height: 60px;
-    background-color: #f5f5f5;
-    border-top: 1px solid #ddd;
+    background-color: #a3e302;
+    border-top: 1px solid #92ca01;
     padding-top: 20px;
+    color: #fff;
 }
 
 .jumbotron {
@@ -89,12 +90,86 @@ a.desc:after {
     padding: 10px 20px;
     margin: 0 0 15px 0;
 }
-div.image-item{
+.header{
+    padding: 5px 0px 10px 0px;
+}
+.green-layout{
+    background-color: #a3e302;
+    border-color: #92ca01;
+    -webkit-box-shadow: 20px 20px 20px #ccc;
+    -moz-box-shadow:    20px 20px 20px #ccc;
+    box-shadow:         0px 5px 10px #ccc;
+    border-radius: 0px;
+    margin-bottom: 10px;
+
+}
+#header-menu > li > a {
+    color: #fff;
+}
+#header-menu > li.active > a{
+    background-color: #3E510D;
+}
+#header-menu > li > a:hover {
+    background-color: #3E510D;
+}
+.divas-wing{
+    width: 150px;!important;
+}
+.section-header{
+    text-align: center;
+    position: absolute;
+    background-color: #fff;
+    width: 200px;
+    left: 35%;
+    z-index: 10;
+    top: -10px;
+}
+.section-header-line{
+    border-bottom: #ccc 2px dashed;
+    margin-top: 20px;
+    margin-bottom: 20px;
     position: relative;
+}
+
+ul.work > li {
+    width: 120px;
+}
+ul.work > li img {
+    margin-left: auto;
+    margin-right: auto;
+}
+.sidebar{
+    display: block;
+    padding: 10px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-right: 1px solid #eee;
+}
+#catalog-menu > li.active > a {
+    background-color: #d9534f;
+}
+div.product-items {
+    padding: 10px 0px;
+}
+div.item{
+    width: 33%;
+    height: 100px;
+    float: left;
+    margin: 10px 0px;
+    cursor: pointer;
+    padding: 5px;
+    border: #fff 1px solid;
+}
+div.image-item{
     display: inline-block;
+    position: relative;
+    float: left;
 }
 a.delete-image{
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 0px;
+    right: 0px;
+}
+div.tab-pane {
+    padding: 10px 0px;
 }

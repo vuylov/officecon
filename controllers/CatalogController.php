@@ -8,9 +8,11 @@ use yii\web\Controller;
 use yii\helpers\VarDumper;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 
 class CatalogController extends Controller
 {
+    public $layout = 'catalog';
     public function behaviors()
     {
         return [
@@ -22,6 +24,7 @@ class CatalogController extends Controller
             ],
             'access'    => [
                 'class' => AccessControl::className(),
+                'only'  => ['create', 'update', 'delete'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -38,29 +41,65 @@ class CatalogController extends Controller
         return $this->render('index', compact('catalogs'));
     }
 
-    public function actionView($id = null)
+    public function actionView($id = null, $product = null)
     {
         if($id === null){
             $this->redirect(['catalog/index']);
         }
+        $model      = Catalog::find()->with(['products'])->where('id = :id', [':id' => $id])->one();
 
-        $catalogs    = Catalog::find()->where(['parent_id' => null])->orderBy('sort')->all();
-        $childs     = Catalog::find()->where(['parent_id' => $id])->all();
-        $model      = Catalog::findOne($id);
+        if($product === null){
+            return $this->render('view',['model' => $model]);
+        }else {
+            return $this->render('//product/view', [
+                'model' => Product::find()->with(['childs', 'compositions', 'files'])->where('id = :id', [':id' => $product])->one(),
+            ]);
+        }
 
-        return $this->render('view', compact(['childs', 'model', 'catalogs']));
     }
 
-    public function actionAdd()
+    public function actionCreate()
     {
         $model = new Catalog();
 
         if($model->load(Yii::$app->request->post()) && $model->save()){
-            $this->redirect(['catalog/add']);
+            $this->redirect(['index']);
         }
         else{
-            return $this->render('add', compact('model'));
+            return $this->render('create', compact('model'));
         }
     }
+
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if($model->load(Yii::$app->request->post()) && $model->save()){
+            $this->redirect(['view', 'id' => $model->id]);
+        }else{
+            return $this->render('update', [
+                'model' => $model
+            ]);
+        }
+    }
+
+    public function actionDelete($id)
+    {
+        if(!$id && !is_int($id))
+            throw new NotFoundHttpException('Bad ID parameter for request.');
+        $this->findModel($id)->delete();
+        $this->redirect(['catalog/index']);
+    }
+
+    protected function findModel($id)
+    {
+        if (($model = Catalog::find()->where(['id' => $id])->one()) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+
 
 }
