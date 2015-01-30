@@ -153,13 +153,25 @@ div.product-items {
 }
 div.item{
     width: 33%;
-    height: 100px;
+    height: 150px;
     float: left;
     margin: 10px 0px;
     cursor: pointer;
     padding: 5px;
     border: #fff 1px solid;
+    text-align: center;
 }
+div.image-item > img {
+    width: 60%;
+}
+div.image-item {
+    border-bottom: thin solid #EFEFEF;
+}
+.item-name{
+    color: #888;
+    font-size: 12px;
+}
+
 div.image-item{
     display: inline-block;
     position: relative;
