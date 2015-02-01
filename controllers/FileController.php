@@ -39,11 +39,8 @@ class FileController extends Controller
             }
             $file       = File::findOne($id);
             if($file === null){
-                //$this->redirect(['site/index']);
-                echo 'file not exist!!!!!';
+                $this->redirect(['site/index']);
             }
-            //$controller = $file->type;
-            //$modelId    = $file->fid;
 
             $fp = Yii::getAlias('@webroot').'/'.$file->path;
 

@@ -13,20 +13,32 @@ use yii\web\Controller;
 use yii\web\MethodNotAllowedHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * CompositionController implements the CRUD actions for Composition model.
  */
 class CompositionController extends Controller
 {
+    public $layout = 'catalog';
     public function behaviors()
     {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['post'],
+                    'delete' => ['post', 'get'],
                 ],
+            ],
+            'access'    => [
+                'class' => AccessControl::className(),
+                'only'  => ['create', 'update', 'delete', 'index'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@']
+                    ]
+                ]
             ],
         ];
     }
@@ -61,19 +73,28 @@ class CompositionController extends Controller
     /**
      * Creates a new Composition model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @param integer $product Product Id
+     * @throws NotFoundHttpException
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($product = null)
     {
+        if($product === null)
+            throw new NotFoundHttpException('Product ID not found');
+
+        $product = Product::findOne($product);
         $model = new Composition();
+        $model->product_id      = $product->id;
+        $model->manufacturer_id = $product->manufacturer_id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             File::saveUploadedImage($model, 'file');
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['catalog/view', 'id' => $product->catalog->id, 'product' => $product->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model'     => $model,
+                'product'   => $product
             ]);
         }
     }
@@ -86,13 +107,15 @@ class CompositionController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model      = $this->findModel($id);
+        $product    = Product::findOne($model->product_id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['catalog/view', 'id' => $model->product->catalog->id, 'product' => $model->product->id, '#' => 'compositions']);
         } else {
             return $this->render('update', [
-                'model' => $model,
+                'model'     => $model,
+                'product'   => $product
             ]);
         }
     }
@@ -105,9 +128,11 @@ class CompositionController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model      = $this->findModel($id);
+        $product    = Product::findOne($model->product_id);
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['catalog/view', 'id' => $product->catalog->id, 'product' => $product->id, '#' => 'compositions']);
     }
 
     /**

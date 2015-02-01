@@ -90,7 +90,10 @@ class ProductController extends Controller
         $model->catalog_id  = $catalog->id;
 
         if($product !== null)
-            $model->parent_id = $product;
+            $product                = $this->findModel($product);
+            $model->parent_id       = $product->id;
+            $model->manufacturer_id = $product->manufacturer_id;
+
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
@@ -135,9 +138,11 @@ class ProductController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $product = Product::findOne($id);
+        $catalog = $product->catalog_id;
+        $product->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['catalog/view', 'id' => $catalog->id]);
     }
 
     /**

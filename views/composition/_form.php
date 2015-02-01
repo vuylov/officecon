@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use app\models\Product;
 use app\models\Manufacturer;
@@ -22,7 +23,11 @@ use kartik\file\FileInput;
     ]); ?>
 
     <?= $form->field($model, 'manufacturer_id')->dropDownList(ArrayHelper::map(Manufacturer::find()->all(), 'id', 'name'), [
-        'prompt'    => 'Выберите поставщика'
+        'readonly'  => true
+    ]);?>
+
+    <?= $form->field($model, 'product_id')->dropDownList(ArrayHelper::map(Product::find()->where('parent_id IS NULL')->all(), 'id', 'name'),[
+        'readonly'  => true
     ]);?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
@@ -45,14 +50,22 @@ use kartik\file\FileInput;
                     <?=Html::img('@web/'.$img->path, ['id' => 'file-'.$img->id, 'class' => 'file-preview-image', 'alt' => $img->name, 'data' => $img->id]);?>
                     <?=Html::a('Удалить', ['file/delete', 'id' => $img->id],[
                         'class' => 'btn btn-danger delete-image',
-                        'data' => [
-                            'confirm' => 'Вы уверены что хотите удалить изображение',
-                            'method' => 'post',
-                        ],
+                        'onclick'   => "
+                            $.ajax({
+                                type: 'POST',
+                                cache: false,
+                                url: '".Url::to(['file/delete', 'id' => $img->id])."',
+                                success: function(response){
+                                    alert('Изображение удалено удален');
+                                    location.reload();
+                                }
+                            });return false;
+                        "
                     ]);?>
                 </div>
             <?php endforeach;?>
         </div>
+        <div class="clearfix"></div>
     <?php endif;?>
 
     <?php echo $form->field($model, 'file[]')->widget(FileInput::classname(),[
@@ -71,9 +84,10 @@ use kartik\file\FileInput;
 
     <div class="form-group pull-right">
         <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Изменить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        <?=Html::a('Отмена',['composition/view', 'id' => $model->id],['class' => 'btn btn-primary']);?>
+        <?=Html::a('Отмена',['catalog/view', 'id' => $product->catalog->id, 'product' => $product->id, '#' => 'compositions'],['class' => 'btn btn-primary']);?>
     </div>
 
     <?php ActiveForm::end(); ?>
 
 </div>
+<div class="clearfix"></div>

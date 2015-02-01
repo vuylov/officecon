@@ -191,6 +191,11 @@ class Product extends \yii\db\ActiveRecord
     public function beforeDelete()
     {
         if(parent::beforeDelete()){
+            if(count($this->childs) > 0){
+                foreach($this->childs as $child){
+                    $child->delete();
+                }
+            }
             File::deleteRelatedFiles($this);
             return true;
         }

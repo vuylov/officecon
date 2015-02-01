@@ -94,7 +94,7 @@ a.desc:after {
     padding: 5px 0px 10px 0px;
 }
 .green-layout{
-    background-color: #a3e302;
+    background-color: #91CA01;
     border-color: #92ca01;
     -webkit-box-shadow: 20px 20px 20px #ccc;
     -moz-box-shadow:    20px 20px 20px #ccc;
@@ -151,6 +151,11 @@ ul.work > li img {
 div.product-items {
     padding: 10px 0px;
 }
+div.product-items > a.item-link{
+    display: block;
+    border: #fff 1px solid;
+}
+
 div.item{
     width: 33%;
     height: 150px;
@@ -158,11 +163,12 @@ div.item{
     margin: 10px 0px;
     cursor: pointer;
     padding: 5px;
-    border: #fff 1px solid;
+
     text-align: center;
 }
-div.image-item > img {
+div.image-item-show > img {
     width: 60%;
+    height: 30%;
 }
 div.image-item {
     border-bottom: thin solid #EFEFEF;
@@ -184,4 +190,32 @@ a.delete-image{
 }
 div.tab-pane {
     padding: 10px 0px;
+}
+div.product-foto{
+    margin-bottom: 10px;
+}
+div.fixed-right-menu {
+   position: fixed;
+   right: 0px;
+    z-index: 99;
+}
+div.fixed-right-menu > a{
+    display: block;
+}
+a.thumbnail:hover, .thumbnail > a:hover{
+    color: #D9534F;!important;
+}
+div.product-compositions > div{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;!important;
+    font-size: 14px;!important;
+}
+div.product-compositions > div > h3{
+    background: #f5f5f5;
+    border: #ddd 1px solid;
+}
+div.product-compositions > div > h3 > span > a.btn{
+    color: #fff;!important;
+}
+div.ui-widget-content{
+    border: #ddd 1px solid;
 }

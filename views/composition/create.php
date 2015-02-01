@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\models\Composition */
 
 $this->title = 'Создание компоновки';
-$this->params['breadcrumbs'][] = ['label' => 'Компоновки', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Каталог', 'url' => ['catalog/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="composition-create">

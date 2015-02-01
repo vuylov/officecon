@@ -34,7 +34,7 @@ class Composition extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'manufacturer_id'], 'required'],
+            [['name', 'manufacturer_id', 'product_id'], 'required'],
             [['price'], 'number'],
             [['manufacturer_id'], 'integer'],
             [['file'], 'safe'],
@@ -54,6 +54,7 @@ class Composition extends ActiveRecord
             'price' => Yii::t('app', 'Цена'),
             'file' => Yii::t('app', 'Изображение для загрузки'),
             'manufacturer_id' => Yii::t('app', 'Поставщик'),
+            'product_id' => Yii::t('app', 'Продукт'),
         ];
     }
 
@@ -73,7 +74,12 @@ class Composition extends ActiveRecord
         return $this->hasMany(CompositionItem::className(), ['composition_id' => 'id']);
     }
 
-    public function getProducts()
+    public function getProduct()
+    {
+        return $this->hasOne(Product::className(), ['id' => 'product_id']);
+    }
+
+    public function getItems()
     {
         return $this->hasMany(Product::className(), ['id' => 'composition_id'])->viaTable('compositionItem', ['composition_id' => 'id']);
     }

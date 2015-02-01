@@ -11,6 +11,7 @@ use Yii;
 use app\models\Product;
 use app\models\Composition;
 use yii\db\ActiveRecord;
+use yii\helpers\VarDumper;
 
 class DataProductItems {
 
@@ -40,11 +41,20 @@ class DataProductItems {
                 'label'     => 'Компоновки',
                 'content'   => Yii::$app->view->render('//product/_compositions', ['model' => $model]),
                 'options'   => [
-                    'id'    => 'composition'
+                    'id'    => 'compositions'
                 ],
             ];
         }
 
+        if(1){
+            $items[] = [
+                'label'     => 'Цвета',
+                'content'   => Yii::$app->view->render('//product/_colors', ['model' => $model]),
+                'options'   => [
+                    'id'    => 'colors'
+                ],
+            ];
+        }
 
         return $items;
     }

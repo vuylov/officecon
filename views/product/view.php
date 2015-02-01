@@ -17,9 +17,9 @@ if(!is_null($model->parent_id)){
 $this->params['breadcrumbs'][] = $model->name;
 ?>
     <?php if(!Yii::$app->user->isGuest):?>
-        <div class="pull-right" style="position: fixed; right: 100px; width: 100px">
-            <?= Html::a('Изменить', ['product/update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a('Удалить', ['product/delete', 'id' => $model->id], [
+        <div class="pull-right fixed-right-menu">
+            <?= Html::a('Изменить продукт', ['product/update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Удалить продукт', ['product/delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [
                     'confirm' => 'Вы уверены что хотите удалить продукт',
@@ -27,6 +27,9 @@ $this->params['breadcrumbs'][] = $model->name;
                 ],
             ]) ?>
             <?= Html::a('Добавить продукт', ['product/create', 'catalog'=>$model->catalog->id, 'product' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?php if(!$model->parent_id):?>
+                <?= Html::a('Добавить компановку', ['composition/create', 'product' => $model->id], ['class' => 'btn btn-primary']);?>
+            <?php endif;?>
         </div>
         <div class="clearfix"></div>
     <?php endif;?>
@@ -34,7 +37,7 @@ $this->params['breadcrumbs'][] = $model->name;
         <h1><?= Html::encode($model->name) ?></h1>
 
         <?php if(count($model->files) > 0):?>
-            <div>
+            <div class="product-foto">
                 <?php $fotorama = Fotorama::begin([
                     'options'    => [
                         'loop'   => 'true',
@@ -54,7 +57,7 @@ $this->params['breadcrumbs'][] = $model->name;
                 <?php $fotorama->end();?>
             </div>
         <?php endif;?>
-
+        <div class="clearfix"></div>
         <?= Tabs::widget([
             'items' => DataProductItems::getItems($model),
         ]);?>
