@@ -148,12 +148,15 @@ class CompositionController extends Controller
 
         //$products       = Product::find()->where('manufacturer_id = :m', [':m' => $composition->manufacturer_id])->orderBy('name')->all();
         $model          = new CompositionItem();
+        $composition    = Composition::findOne($id);
 
         if($model->load(Yii::$app->request->post()) && $model->save()){
-            return $this->redirect(['view', 'id' => $model->composition_id]);
+
+            return $this->redirect(['catalog/view']);
         }else {
             $model->composition_id  = $id;
             return $this->render('//compositionItem/create', [
+               'composition'    => $composition,
                'model'          => $model,
             ]);
         }

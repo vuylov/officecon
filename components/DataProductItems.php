@@ -37,6 +37,7 @@ class DataProductItems {
         }
 
         if($model->compositions){
+            //$model = Product::find()->with('compositions')->where('id = :id', [':id' => $model->id])->one();
             $items[] = [
                 'label'     => 'Компоновки',
                 'content'   => Yii::$app->view->render('//product/_compositions', ['model' => $model]),

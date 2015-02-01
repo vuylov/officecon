@@ -4,7 +4,9 @@ use yii\helpers\Html;
 /* @var $model app\models\Composition */
 
 $this->title = 'Добавление продукта в комплект';
-$this->params['breadcrumbs'][] = ['label' => 'Компоновки', 'url' => ['composition/index']];
+$this->params['breadcrumbs'][] = ['label' => 'Каталог', 'url' => ['catalog/index']];
+$this->params['breadcrumbs'][] = ['label' => $composition->product->catalog->name, 'url' => ['catalog/view', 'id' => $composition->product->catalog->id]];
+$this->params['breadcrumbs'][] = ['label' => $composition->product->name, 'url' => ['catalog/view', 'id' => $composition->product->catalog->id, 'product' => $composition->product->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="composition-create">
@@ -13,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('//compositionItem/_form', [
         'model' => $model,
+        'composition' => $composition
     ]) ?>
 
 </div>

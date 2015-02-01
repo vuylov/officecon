@@ -31,8 +31,8 @@ class CompositionItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['productItem_id', 'composition_id'], 'required', 'message' => 'Необходимо заполнить'],
-            [['productItem_id', 'composition_id', 'amount'], 'integer']
+            [['product_id', 'composition_id'], 'required', 'message' => 'Необходимо заполнить'],
+            [['product_id', 'composition_id', 'amount'], 'integer']
         ];
     }
 
@@ -43,7 +43,7 @@ class CompositionItem extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'productItem_id' => Yii::t('app','Продукт'),
+            'product_id' => Yii::t('app','Продукт'),
             'composition_id' => Yii::t('app','Композиция'),
             'amount' => Yii::t('app','Количество'),
         ];
@@ -60,8 +60,8 @@ class CompositionItem extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getArticle()
+    public function getProduct()
     {
-        return $this->hasOne(Item::className(), ['id' => 'productItem_id']);
+        return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
 }
