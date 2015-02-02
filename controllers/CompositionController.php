@@ -32,7 +32,7 @@ class CompositionController extends Controller
             ],
             'access'    => [
                 'class' => AccessControl::className(),
-                'only'  => ['create', 'update', 'delete', 'index'],
+                'only'  => ['create', 'update', 'delete', 'index', 'idelete'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -111,6 +111,7 @@ class CompositionController extends Controller
         $product    = Product::findOne($model->product_id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            File::saveUploadedImage($model, 'file');
             return $this->redirect(['catalog/view', 'id' => $model->product->catalog->id, 'product' => $model->product->id, '#' => 'compositions']);
         } else {
             return $this->render('update', [
@@ -151,8 +152,8 @@ class CompositionController extends Controller
         $composition    = Composition::findOne($id);
 
         if($model->load(Yii::$app->request->post()) && $model->save()){
-
-            return $this->redirect(['catalog/view']);
+            $product = $composition->product;
+            return $this->redirect(['catalog/view', 'id' => $product->catalog->id, 'product' => $product->id]);
         }else {
             $model->composition_id  = $id;
             return $this->render('//compositionItem/create', [
@@ -192,14 +193,20 @@ class CompositionController extends Controller
     public function actionIdelete($id)
     {
         $item = $this->findItemModel($id);
-        if($item !== null){
+        if($item->delete()){
+            echo 'Продукт удален из компоновки';
+        }else{
+            echo $item->errors;
+        }
+
+        /*if($item !== null){
             $composition = $item->composition_id;
             $item->delete();
 
             return $this->redirect(['view', 'id' => $composition]);
         }else{
             throw new NotFoundHttpException('The ID item not exist already');
-        }
+        }*/
     }
 
     /**

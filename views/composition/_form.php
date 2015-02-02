@@ -71,7 +71,7 @@ use kartik\file\FileInput;
     <?php echo $form->field($model, 'file[]')->widget(FileInput::classname(),[
         'options'       => [
             'accept' => 'image/*',
-            'multiple' => true
+            //'multiple' => true
         ],
         'pluginOptions' => [
             'showUpload'        => false,

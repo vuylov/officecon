@@ -37,8 +37,8 @@ class Composition extends ActiveRecord
             [['name', 'manufacturer_id', 'product_id'], 'required'],
             [['price'], 'number'],
             [['manufacturer_id'], 'integer'],
-            [['file'], 'safe'],
-            [['name', 'description'], 'string', 'max' => 255]
+            [['file', 'description'], 'safe'],
+            [['name'], 'string', 'max' => 255]
         ];
     }
 
@@ -63,7 +63,7 @@ class Composition extends ActiveRecord
      */
     public function getManufacturer()
     {
-        return $this->hasOne(Manufacturer::className(), ['id' => 'manufacturer_id']);
+        return $this->hasOne(Manufacturer::className(), ['id' => 'manPhufacturer_id']);
     }
 
     /**
@@ -71,7 +71,7 @@ class Composition extends ActiveRecord
      */
     public function getCompositionItems()
     {
-        return $this->hasMany(CompositionItem::className(), ['composition_id' => 'id']);
+        return $this->hasMany(CompositionItem::className(), ['composition_id' => 'id'])->with('product');
     }
 
     public function getProduct()
