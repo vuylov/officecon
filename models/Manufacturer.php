@@ -3,6 +3,9 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveRecord;
+use app\models\Product;
+use app\models\Color;
 
 /**
  * This is the model class for table "manufacturer".
@@ -32,7 +35,8 @@ class Manufacturer extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['name', 'image', 'url', 'country'], 'string', 'max' => 255]
+            [['image'], 'safe'],
+            [['name', 'url', 'country'], 'string', 'max' => 255]
         ];
     }
 
@@ -43,10 +47,10 @@ class Manufacturer extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'image' => 'Image',
-            'url' => 'Url',
-            'country' => 'Country',
+            'name' => 'Наименование',
+            'image' => 'Изображение',
+            'url' => 'Адрес сайта',
+            'country' => 'Страна',
         ];
     }
 
@@ -56,5 +60,13 @@ class Manufacturer extends \yii\db\ActiveRecord
     public function getProducts()
     {
         return $this->hasMany(Product::className(), ['manufacturer_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getColors()
+    {
+        return $this->hasMany(Color::className(), ['manufacturer_id' => 'id']);
     }
 }

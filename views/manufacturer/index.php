@@ -6,7 +6,8 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Manufacturers';
+$this->title = 'Поставщики';
+$this->params['breadcrumbs'][] = ['label' => 'Управление', 'url' => ['admin/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="manufacturer-index">
@@ -14,17 +15,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Manufacturer', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить поставщика', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
-        'dataProvider' => $dataProvider,
+        'summary'       => '<div class="summary pull-right">Найдено :<span class="badge">{totalCount}</span></div><div class="clearfix"></div>',
+        'dataProvider'  => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
+            //'id',
             'name',
-            'image',
+            //'image',
             'url:url',
             'country',
 
