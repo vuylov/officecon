@@ -47,7 +47,7 @@ class DataProductItems {
             ];
         }
 
-        if(1){
+        if($model->productColors || !Yii::$app->user->isGuest){
             $items[] = [
                 'label'     => 'Цвета',
                 'content'   => Yii::$app->view->render('//product/_colors', ['model' => $model]),

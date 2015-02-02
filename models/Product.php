@@ -167,6 +167,14 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasMany(Product::className(), ['parent_id' => 'id'])->orderBy('type_id');
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProductColors()
+    {
+        return $this->hasMany(ProductColors::className(), ['product_id' => 'id']);
+    }
+
      /**
      * override beforeSave()
      */
