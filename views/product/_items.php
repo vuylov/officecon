@@ -6,12 +6,19 @@ use yii\helpers\Url;
     <?php foreach($model->childs as $child):?>
         <div class="col-xs-6 col-md-3">
             <a href="<?=Url::to(['catalog/view', 'id' => $child->catalog->id, 'product' => $child->id]); ?>" class="thumbnail">
-                <?php $img = $child->files;?>
-                <img src = '<?= Yii::$app->homeUrl.'/'.$img[0]->path;?>' style="height: 150px; width: 100%; display: block">
-                <div class="small">
-                    <p><?=$child->name;?></p>
-                    <p><?=$child->article;?></p>
-                </div>
+                <?php if(count($child->files) > 0):?>
+                    <?php $img = $child->files;?>
+                    <img src = '<?= Yii::$app->homeUrl.'/'.$img[0]->path;?>' style="height: 150px; width: 100%; display: block">
+                    <div class="small product-notice">
+                        <p><?=$child->name;?></p>
+                        <p><?=$child->article;?></p>
+                    </div>
+                <?php else:?>
+                    <div class="small">
+                        <p><?=$child->name;?></p>
+                        <p><?=$child->article;?></p>
+                    </div>
+                <?php endif;?>
             </a>
         </div>
     <?php endforeach;?>

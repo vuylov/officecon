@@ -154,7 +154,7 @@ class ProductController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Product::find()->where(['id' => $id])->with(['files', 'prices', 'catalog'])->one()) !== null) {
+        if (($model = Product::find()->where(['id' => $id])->with(['files', 'prices', 'catalog', 'compositions'])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

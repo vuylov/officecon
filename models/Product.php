@@ -164,7 +164,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getChilds()
     {
-        return $this->hasMany(Product::className(), ['parent_id' => 'id']);
+        return $this->hasMany(Product::className(), ['parent_id' => 'id'])->orderBy('type_id');
     }
 
      /**

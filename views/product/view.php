@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $model->name;
             ]) ?>
             <?= Html::a('Добавить продукт', ['product/create', 'catalog'=>$model->catalog->id, 'product' => $model->id], ['class' => 'btn btn-primary']) ?>
             <?php if(!$model->parent_id):?>
-                <?= Html::a('Добавить компановку', ['composition/create', 'product' => $model->id], ['class' => 'btn btn-primary']);?>
+                <?= Html::a('Добавить компоновку', ['composition/create', 'product' => $model->id], ['class' => 'btn btn-primary']);?>
             <?php endif;?>
         </div>
         <div class="clearfix"></div>
