@@ -21,7 +21,8 @@
         "vova07/yii2-imperavi-widget": "*",
         "kartik-v/yii2-widget-fileinput": "*",
         "yiisoft/yii2-jui": "*",
-        "metalguardian/yii2-fotorama-widget": "*"
+        "metalguardian/yii2-fotorama-widget": "*",
+        "newerton/yii2-fancybox": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

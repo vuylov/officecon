@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "37927100c771e0bab4a70643038d7838",
+    "hash": "4902dda3145d288223cf30754ded264f",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -350,12 +350,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
-                "reference": "b8555e019cf18e87472e00839510c653e00ee1f7"
+                "reference": "6d681f8b4dc1b9e4478c851d0e806ff810aa55c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/b8555e019cf18e87472e00839510c653e00ee1f7",
-                "reference": "b8555e019cf18e87472e00839510c653e00ee1f7",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/6d681f8b4dc1b9e4478c851d0e806ff810aa55c5",
+                "reference": "6d681f8b4dc1b9e4478c851d0e806ff810aa55c5",
                 "shasum": ""
             },
             "type": "library",
@@ -390,7 +390,7 @@
                 "progress",
                 "upload"
             ],
-            "time": "2015-01-31 22:09:03"
+            "time": "2015-02-01 23:55:15"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -398,12 +398,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-krajee-base.git",
-                "reference": "43e02cff8be2cbc2d0714ff514024e13d04e67e8"
+                "reference": "02ca53ac2ce4d16c9874529349a713c1db4864ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/43e02cff8be2cbc2d0714ff514024e13d04e67e8",
-                "reference": "43e02cff8be2cbc2d0714ff514024e13d04e67e8",
+                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/02ca53ac2ce4d16c9874529349a713c1db4864ea",
+                "reference": "02ca53ac2ce4d16c9874529349a713c1db4864ea",
                 "shasum": ""
             },
             "require": {
@@ -436,7 +436,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-01-31 23:28:06"
+            "time": "2015-02-01 18:23:30"
         },
         {
             "name": "kartik-v/yii2-widget-fileinput",
@@ -529,6 +529,123 @@
                 "yii2"
             ],
             "time": "2014-06-01 21:17:58"
+        },
+        {
+            "name": "newerton/fancy-box",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/newerton/fancy-box.git",
+                "reference": "ee714eeb8a81914619f8ab5c7c3a9fd72b1a2ce2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/newerton/fancy-box/zipball/ee714eeb8a81914619f8ab5c7c3a9fd72b1a2ce2",
+                "reference": "ee714eeb8a81914619f8ab5c7c3a9fd72b1a2ce2",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Newerton Vargas de Araujo",
+                    "homepage": "http://newerton.com.br",
+                    "role": "Developer / Freelancer"
+                }
+            ],
+            "description": "fancyBox is a tool that offers a nice and elegant way to add zooming functionality for images, html content and multi-media on your webpages",
+            "homepage": "http://fancyapps.com/fancybox/",
+            "keywords": [
+                "fancyapps",
+                "fancybox",
+                "gallery",
+                "jquery"
+            ],
+            "time": "2014-04-30 21:10:22"
+        },
+        {
+            "name": "newerton/jquery-mousewheel",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/newerton/jquery-mousewheel.git",
+                "reference": "7786a0912e92521f963924fe37026f87eadfbe62"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/newerton/jquery-mousewheel/zipball/7786a0912e92521f963924fe37026f87eadfbe62",
+                "reference": "7786a0912e92521f963924fe37026f87eadfbe62",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Newerton Vargas de Araujo",
+                    "homepage": "http://newerton.com.br",
+                    "role": "Developer / Freelancer"
+                }
+            ],
+            "description": "A jQuery plugin that adds cross-browser mouse wheel support.",
+            "homepage": "https://github.com/brandonaaron/jquery-mousewheel",
+            "keywords": [
+                "jquery",
+                "mouse",
+                "mousewheel",
+                "wheel"
+            ],
+            "time": "2014-04-30 19:29:53"
+        },
+        {
+            "name": "newerton/yii2-fancybox",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/newerton/yii2-fancybox.git",
+                "reference": "d21a9db844ec897957d31d97e56d2238728b1278"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/newerton/yii2-fancybox/zipball/d21a9db844ec897957d31d97e56d2238728b1278",
+                "reference": "d21a9db844ec897957d31d97e56d2238728b1278",
+                "shasum": ""
+            },
+            "require": {
+                "newerton/fancy-box": "dev-master",
+                "newerton/jquery-mousewheel": "dev-master",
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "newerton\\fancybox\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Newerton Vargas de Araujo",
+                    "email": "newerton.araujo@gmail.com"
+                }
+            ],
+            "description": "fancyBox is a tool that offers a nice and elegant way to add zooming functionality for images, html content and multi-media on your webpages.",
+            "keywords": [
+                "extension",
+                "fancyapps",
+                "fancybox",
+                "yii2"
+            ],
+            "time": "2014-09-26 23:59:16"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -641,12 +758,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "157a69f1a76793cb19c0b00e3d47784c76bee9d7"
+                "reference": "07fea616749326ff4c0bbc72984c05f2ef2dbab2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/157a69f1a76793cb19c0b00e3d47784c76bee9d7",
-                "reference": "157a69f1a76793cb19c0b00e3d47784c76bee9d7",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/07fea616749326ff4c0bbc72984c05f2ef2dbab2",
+                "reference": "07fea616749326ff4c0bbc72984c05f2ef2dbab2",
                 "shasum": ""
             },
             "require": {
@@ -722,7 +839,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-02-01 03:26:51"
+            "time": "2015-02-02 05:55:32"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -1219,7 +1336,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "newerton/yii2-fancybox": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
