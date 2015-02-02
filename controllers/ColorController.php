@@ -5,9 +5,11 @@ namespace app\controllers;
 use Yii;
 use app\models\Color;
 use yii\data\ActiveDataProvider;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ColorController implements the CRUD actions for Color model.
@@ -63,8 +65,18 @@ class ColorController extends Controller
     {
         $model = new Color();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) ) {
+
+            $file = UploadedFile::getInstance($model, 'file');
+            $name = Yii::$app->security->generateRandomString(16);
+            $model->path = 'upload/'.$name.'.'.$file->extension;
+
+            if($model->save()){
+                $file->saveAs($model->path);
+                return $this->redirect(['view', 'id' => $model->id]);
+            }else{
+                VarDumper::dump($model->errors, 10, true);
+            }
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -82,7 +94,17 @@ class ColorController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            $file = UploadedFile::getInstance($model, 'file');
+            if($file){
+                $model->deleteUploadedFile();
+                $model->path = 'upload/'.Yii::$app->security->generateRandomString(16).'.'.$file->extension;
+
+                if($model->save()){
+                    $file->saveAs($model->path);
+                }
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

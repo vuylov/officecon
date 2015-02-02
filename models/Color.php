@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "color".
@@ -14,8 +15,9 @@ use Yii;
  * @property Manufacturer $manufacturer
  * @property ProductColor[] $productColors
  */
-class Color extends \yii\db\ActiveRecord
+class Color extends ActiveRecord
 {
+    public $file;
     /**
      * @inheritdoc
      */
@@ -30,8 +32,9 @@ class Color extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['manufacturer_id', 'name'], 'required'],
+            [['manufacturer_id', 'name'], 'required', 'message' => 'Обязательно для заполнения'],
             [['manufacturer_id'], 'integer'],
+            [['path', 'file'], 'safe'],
             [['name'], 'string', 'max' => 255]
         ];
     }
@@ -43,8 +46,10 @@ class Color extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'manufacturer_id' => 'Manufacturer ID',
-            'name' => 'Name',
+            'manufacturer_id' => 'Поставщик',
+            'name' => 'Название',
+            'path'  => 'Путь к изображению',
+            'file' => 'Изображение цвета'
         ];
     }
 
@@ -62,5 +67,28 @@ class Color extends \yii\db\ActiveRecord
     public function getProductColors()
     {
         return $this->hasMany(ProductColor::className(), ['color_id' => 'id']);
+    }
+
+    /**
+     * override beforeDelete
+     */
+    public function beforeDelete()
+    {
+        if(parent::beforeDelete()){
+
+            $this->deleteUploadedFile();
+            return true;
+        }
+        return false;
+    }
+
+    public function deleteUploadedFile()
+    {
+        $file = Yii::getAlias('@webroot').'/'.$this->path;
+        if(file_exists($file)){
+            unlink($file);
+        }else{
+            Yii::warning('Удаляемого файла не существует. Модель #: '.$this->id.'. Файл: '.$this->path);
+        }
     }
 }

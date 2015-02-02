@@ -6,8 +6,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Color */
 
-$this->title = 'Create Color';
-$this->params['breadcrumbs'][] = ['label' => 'Colors', 'url' => ['index']];
+$this->title = 'Добавить цвет';
+$this->params['breadcrumbs'][] = ['label' => 'Управление', 'url' => ['admin/index']];
+$this->params['breadcrumbs'][] = ['label' => 'Цвета', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="color-create">

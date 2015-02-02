@@ -10,7 +10,8 @@ class m150202_101805_create_color_table extends Migration
         $this->createTable('color', [
             'id'    => 'pk',
             'manufacturer_id' => Schema::TYPE_INTEGER.' NOT NULL',
-            'name'  => Schema::TYPE_STRING.' NOT NULL'
+            'name'  => Schema::TYPE_STRING.' NOT NULL',
+            'path'  => Schema::TYPE_STRING
         ]);
         $this->addForeignKey('FKcolor_manuf', 'color', 'manufacturer_id', 'manufacturer', 'id', 'cascade', 'cascade');
     }

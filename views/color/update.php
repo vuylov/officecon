@@ -5,10 +5,11 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Color */
 
-$this->title = 'Update Color: ' . ' ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Colors', 'url' => ['index']];
+$this->title = 'Изменение цвета: ' . ' ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Управление', 'url' => ['admin/index']];
+$this->params['breadcrumbs'][] = ['label' => 'Цветы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Изменение';
 ?>
 <div class="color-update">
 
