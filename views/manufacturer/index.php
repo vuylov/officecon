@@ -14,9 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Добавить поставщика', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+
 
     <?= GridView::widget([
         'summary'       => '<div class="summary pull-right">Найдено :<span class="badge">{totalCount}</span></div><div class="clearfix"></div>',
@@ -32,5 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
+    <p class="pull-right">
+        <?= Html::a('Добавить поставщика', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 </div>
