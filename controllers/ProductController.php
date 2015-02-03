@@ -3,7 +3,9 @@
 namespace app\controllers;
 
 use app\models\Catalog;
+use app\models\Color;
 use app\models\File;
+use app\models\ProductColors;
 use Yii;
 use app\models\Product;
 use app\models\ProductSearch;
@@ -158,6 +160,23 @@ class ProductController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function actionAddColor($id = null)
+    {
+        $model         = new ProductColors();
+        $product       = $this->findModel($id);
+        $colors        = Color::find()->where('manufacturer_id = :m', [':m' => $model->manufacturer_id])->all();
+
+        if($model->load(Yii::$app->request->post())){
+
+        }else{
+            $this->render('addcolor', [
+                'product'   => $product,
+                'model'     => $model,
+                'colors'    => $colors
+            ]);
         }
     }
 }
