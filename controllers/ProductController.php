@@ -163,20 +163,37 @@ class ProductController extends Controller
         }
     }
 
-    public function actionAddColor($id = null)
+    public function actionColors($id = null)
     {
-        $model         = new ProductColors();
         $product       = $this->findModel($id);
-        $colors        = Color::find()->where('manufacturer_id = :m', [':m' => $model->manufacturer_id])->all();
+        $colors        = Color::find()->where('manufacturer_id = :m', [':m' => $product->manufacturer_id])->all();
+
+        if($product->productColors){
+            $checked = ArrayHelper::getColumn($product->productColors, 'color_id');
+        }else{
+            $checked = null;
+        }
+        $model         = new ProductColors();
 
         if($model->load(Yii::$app->request->post())){
-
+            $product->deleteColors();
+            foreach($model->color_id as $color){
+                $pColor = new ProductColors();
+                $pColor->product_id     = $model->product_id;
+                $pColor->color_id       = $color;
+                $pColor->save(false);
+                unset($pColor);
+            }
+            return $this->redirect(['catalog/view', 'id' => $product->catalog_id, 'product' => $product->id]);
         }else{
-            $this->render('addcolor', [
-                'product'   => $product,
-                'model'     => $model,
-                'colors'    => $colors
-            ]);
+            $model->product_id = $product->id;
+
+            return $this->render('addcolor', [
+                    'product'   => $product,
+                    'model'     => $model,
+                    'colors'    => $colors,
+                    'checked'   => $checked
+                ]);
         }
     }
 }

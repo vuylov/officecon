@@ -2,7 +2,6 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\jui\Accordion;
-use newerton\fancybox\FancyBox;
 
 $items = [];
 $catalog = $model->catalog;
@@ -62,39 +61,6 @@ foreach($model->compositions as $composition){
     ];
 }
 ?>
-<?= FancyBox::widget([
-    'target' => 'a[rel=fancybox]',
-    'helpers' => true,
-    'mouse' => true,
-    'config' => [
-        'maxWidth' => '90%',
-        'maxHeight' => '90%',
-        //'playSpeed' => 7000,
-        'arrows' => false,
-        'padding' => 0,
-        'fitToView' => false,
-        'width' => '70%',
-        'height' => '70%',
-        'autoSize' => false,
-        'closeClick' => false,
-        'openEffect' => 'elastic',
-        'closeEffect' => 'elastic',
-        'prevEffect' => 'elastic',
-        'nextEffect' => 'elastic',
-        'closeBtn' => true,
-        'openOpacity' => true,
-        //'autoCenter'  => true,
-        /*'helpers' => [
-            'title' => ['type' => 'float'],
-            'buttons' => [],
-            'thumbs' => ['width' => 68, 'height' => 50],
-            'overlay' => [
-                'css' => [
-                    'background' => 'rgba(0, 0, 0, 0.8)'
-                ]
-            ]*/
-        ],
-    ]);?>
 <div class="product-compositions">
     <?= Accordion::widget([
         'items' => $items,

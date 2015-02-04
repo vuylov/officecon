@@ -214,4 +214,9 @@ class Product extends \yii\db\ActiveRecord
     {
         return self::FILE_TYPE;
     }
+
+    public function deleteColors()
+    {
+        ProductColors::deleteAll('product_id = :p', [':p' => $this->id]);
+    }
 }

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use metalguardian\fotorama\Fotorama;
 use yii\bootstrap\Tabs;
 use app\components\DataProductItems;
+use newerton\fancybox\FancyBox;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Product */
@@ -15,7 +16,39 @@ if(!is_null($model->parent_id)){
     $this->params['breadcrumbs'][] = ['label' => $model->parent->name, 'url' => ['catalog/view', 'id' => $model->catalog->id, 'product' => $model->parent->id]];
 }
 $this->params['breadcrumbs'][] = $model->name;
-?>
+echo FancyBox::widget([
+    'target' => 'a[rel=fancybox]',
+    'helpers' => true,
+    'mouse' => true,
+    'config' => [
+        'maxWidth' => '90%',
+        'maxHeight' => '90%',
+        //'playSpeed' => 7000,
+        'arrows' => false,
+        'padding' => 0,
+        'fitToView' => false,
+        'width' => '70%',
+        'height' => '70%',
+        'autoSize' => false,
+        'closeClick' => false,
+        'openEffect' => 'elastic',
+        'closeEffect' => 'elastic',
+        'prevEffect' => 'elastic',
+        'nextEffect' => 'elastic',
+        'closeBtn' => true,
+        'openOpacity' => true,
+        //'autoCenter'  => true,
+        /*'helpers' => [
+            'title' => ['type' => 'float'],
+            'buttons' => [],
+            //'thumbs' => ['width' => 68, 'height' => 50],
+            'overlay' => [
+                'css' => [
+                    'background' => 'rgba(0, 0, 0, 0.8)'
+                ]
+            ]
+    ],*/
+]]);?>
     <?php if(!Yii::$app->user->isGuest):?>
         <div class="pull-right fixed-right-menu">
             <?= Html::a('Изменить продукт', ['product/update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

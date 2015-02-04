@@ -30,7 +30,7 @@ class ProductColors extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'color_id'], 'required'],
+            [['product_id', 'color_id'], 'required', 'message' => 'Обязателен для заполнения'],
             [['product_id', 'color_id'], 'integer']
         ];
     }
@@ -42,15 +42,15 @@ class ProductColors extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'product_id' => 'Product ID',
-            'color_id' => 'Color ID',
+            'product_id' => 'Продукт',
+            'color_id' => 'Цвета',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getColor()
+    public function getBaseColor()
     {
         return $this->hasOne(Color::className(), ['id' => 'color_id']);
     }

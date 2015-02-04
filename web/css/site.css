@@ -238,3 +238,17 @@ div.product-notice{
 div.product-notice > p{
     margin-bottom: -1px;
 }
+img.color-image{
+    position: relative;
+}
+div.img-color-name{
+    position: absolute;
+    left: inherit;
+    top: 40%;
+    background-color: #d9534f;
+    padding: 5px;
+    text-align: center;
+}
+a.color-link{
+    color: #fff;
+}
