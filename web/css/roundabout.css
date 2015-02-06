@@ -1,0 +1,105 @@
+/*#roundaboutslider {
+    overflow:hidden;
+}
+#roundabout-loader {
+    height:380px;
+    margin:50px auto;
+    background:url(images/loading.gif) 50% 230px no-repeat;
+}*/
+#roundabout-inner {
+    display:none;
+}
+.roundabout-holder {
+    height:380px;
+    left:50%;
+    margin:0 0 0 -316px;
+    position:absolute;
+    width:640px;
+}
+.roundabout-moveable-item {
+    cursor:pointer;
+    list-style-type:none;
+    overflow:hidden;
+    height:382px;
+    width:638px;
+    margin:0;
+    padding:0;
+    background-color: #000;
+    border-radius:5px 5px 0 0;
+    -moz-border-radius:5px 5px 0 0;
+    -webkit-border-radius:5px 5px 0 0;
+    border-bottom:10px solid #d9534f;
+}
+.roundabout-moveable-item > img{
+    background-color: rgba(0,0,0,0.5);
+    opacity: 0.3;
+}
+.roundabout-caption {
+    padding:15px;
+    text-align:left;
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    background-position:0 bottom;
+    background-repeat:repeat-x;
+    background-color:rgba(255,255,255,.8);
+    z-index:1;
+    font-size:13px;
+}
+.roundabout-caption .roundabout-title {
+    position:relative;
+    display:block;
+    margin:5px 0 10px;
+    font-size:20px;
+    text-shadow:0 0 3px #dddddd;
+}
+.roundabout-caption .roundabout-content {
+    position:relative;
+    display:block;
+    margin-bottom:10px;
+}
+.roundabout-moveable-item img {
+    display:block;
+    height:100%;
+    width:100%;
+    border-radius:5px 5px 0 0;
+    -moz-border-radius:5px 5px 0 0;
+    -webkit-border-radius:5px 5px 0 0;
+}
+.roundabout-in-focus {
+    cursor:auto;
+}
+.roundabout-in-focus > img{
+    background:none;
+    opacity: 1;!important;
+}
+.roundabout-in-focus a {
+    display:block;
+    height:382px;
+    width:638px;
+}
+#roundabout-prev,
+#roundabout-next {
+    width:39px;
+    height:39px;
+    display:block;
+    left:50%;
+    top:50%;
+    margin-top:-19px;
+    margin-left:-580px;
+    position:absolute;
+    background:url(../img/roundabout-direction.png) 0 0 no-repeat;
+}
+#roundabout-next {
+    background-position:-39px 0;
+    left:auto;
+    right:50%;
+    margin-right:-580px;
+}
+#roundabout-prev:hover {
+    background-position:0 -39px;
+}
+#roundabout-next:hover {
+    background-position:-39px -39px;
+}

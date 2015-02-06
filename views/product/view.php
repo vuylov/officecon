@@ -78,17 +78,22 @@ echo FancyBox::widget([
                         'width'  => 600,
                         'height' => 400,
                         'allowfullscreen' => 'native',
-                        'autoplay'=> 5000
+                        'autoplay'=> 5000,
+                        'caption'   => true
                     ] ,
                     'spinner'   => [
                         'lines' => 20,
                     ]
                 ]);?>
+
                 <?php foreach($model->files as $img):?>
-                    <?= Yii::$app->formatter->asImage('@web/'.$img->path, ['title' => $img->name, 'alt' => $img->name]);?>
+                    <?= Yii::$app->formatter->asImage('@web/'.$img->path, ['title' => $img->name, 'alt' => $img->name/*, 'data-caption' => 'Цена: 50000'*/]);?>
+
                 <?php endforeach;?>
                 <?php $fotorama->end();?>
             </div>
+        <?php else:?>
+            <?= Html::img(Yii::$app->homeUrl.'/img/nofoto.jpg', ['width' => '300px']);?>
         <?php endif;?>
         <div class="clearfix"></div>
         <?= Tabs::widget([

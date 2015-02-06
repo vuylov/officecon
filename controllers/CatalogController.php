@@ -52,7 +52,7 @@ class CatalogController extends Controller
             return $this->render('view',['model' => $model]);
         }else {
             return $this->render('//product/view', [
-                'model' => Product::find()->with(['childs', 'compositions', 'files'])->where('id = :id', [':id' => $product])->one(),
+                'model' => Product::find()->with(['childs', 'compositions', 'files', 'productColors'])->where('id = :id', [':id' => $product])->one(),
             ]);
         }
 

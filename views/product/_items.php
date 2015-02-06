@@ -10,14 +10,12 @@ use yii\helpers\Url;
                     <?php $img = $child->files;?>
                     <img src = '<?= Yii::$app->homeUrl.'/'.$img[0]->path;?>' style="height: 150px; width: 100%; display: block">
                     <div class="small product-notice">
-                        <p><?=$child->name;?></p>
-                        <p><?=$child->article;?></p>
+                        <p><?=($child->name) ? $child->name : '';?></p>
+                        <p><?=($child->article) ? $child->article : '';?></p>
+                        <p><?=($child->size) ? $child->size : '';?></p>
                     </div>
                 <?php else:?>
-                    <div class="small">
-                        <p><?=$child->name;?></p>
-                        <p><?=$child->article;?></p>
-                    </div>
+                    <div class="jumbotron">Нет информации о комплектации</div>
                 <?php endif;?>
             </a>
         </div>

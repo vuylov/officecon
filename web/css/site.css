@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&subset=cyrillic,latin);
 html,
 body {
     height: 100%;
@@ -17,9 +18,10 @@ body {
 .footer {
     height: 60px;
     background-color: #a3e302;
-    border-top: 1px solid #92ca01;
     padding-top: 20px;
     color: #fff;
+    margin-top: 10px;
+    border-radius: 4px 4px 0px 0px;
 }
 
 .jumbotron {
@@ -99,7 +101,7 @@ a.desc:after {
     -webkit-box-shadow: 20px 20px 20px #ccc;
     -moz-box-shadow:    20px 20px 20px #ccc;
     box-shadow:         0px 5px 10px #ccc;
-    border-radius: 0px;
+    border-radius: 4px;
     margin-bottom: 10px;
 
 }
@@ -114,29 +116,6 @@ a.desc:after {
 }
 .divas-wing{
     width: 150px;!important;
-}
-.section-header{
-    text-align: center;
-    position: absolute;
-    background-color: #fff;
-    width: 200px;
-    left: 35%;
-    z-index: 10;
-    top: -10px;
-}
-.section-header-line{
-    border-bottom: #ccc 2px dashed;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    position: relative;
-}
-
-ul.work > li {
-    width: 120px;
-}
-ul.work > li img {
-    margin-left: auto;
-    margin-right: auto;
 }
 .sidebar{
     display: block;
@@ -251,4 +230,50 @@ div.img-color-name{
 }
 a.color-link{
     color: #fff;
+}
+div.header-center-block{
+    margin-top: 22px;
+    text-align: center;
+    font-weight: bold;
+    line-height: 25px;
+}
+ul.work{
+    padding: 10px 0px;
+}
+ul.work > li {
+    cursor: pointer;
+    width: 120px;
+    text-align: center;
+}
+
+ul.banners > li{
+    width: 220px;
+}
+ul.banners > li > img {
+    width: 150px;
+}
+
+hr.style-work, hr.style-customer {
+    padding: 0;
+    border: none;
+    border-top: medium double #BECD98;
+    color: #333;
+    text-align: center;
+}
+hr.style-work:after, hr.style-customer:after {
+    display: inline-block;
+    position: relative;
+    top: -0.8em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #3E510D;
+    overflow: visible;
+}
+hr.style-work:after{
+    content: "Работаем по принципу";
+}
+hr.style-customer:after{
+    content: "Наши заказчики";
 }

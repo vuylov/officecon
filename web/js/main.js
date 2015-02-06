@@ -1,20 +1,22 @@
-$(document).ready(function()
-{
-    $(".edit-product").hover(
+$(document).ready(function(){
+    $("ul.slider-container").roundabout({
+        autoplay: true,
+        autoplayDuration: 7000,
+        autoplayPauseOnHover: true,
+        btnNext: $('#roundabout-next'),
+        btnPrev: $('#roundabout-prev')
+    });
+
+    $('[data-toggle = "tooltip"]').tooltip();
+    $('img.step').hover(
         function(){
-            $(this).css('border', '1px solid red');
-        }, function(){
-            $(this).css('border', 'none');
+            var src  = $(this).attr('src').replace('_g', '_y');
+            $(this).attr('src', src);
+        },
+        function(){
+            var src = $(this).attr('src').replace('_y', '_g');
+            $(this).attr('src', src);
         }
     );
-    $("#slider").divas({
-        slideTransitionClass: "divas-slide-transition-left",
-        titleTransitionClass: "divas-title-transition-left",
-        titleTransitionParameter: "left",
-        titleTransitionStartValue: "-999px",
-        titleTransitionStopValue: "0px",
-        wingsOverlayColor: "rgba(9,9,9,0.6)",
-        //start: "auto",
-        slideInterval: 8000
-    });
+
 });

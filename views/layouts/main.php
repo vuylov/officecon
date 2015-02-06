@@ -32,8 +32,11 @@ AppAsset::register($this);
                     </a>
                 </div>
                 <div class="col-md-4">
-                    <div style="text-align: center; font-weight: bold; font-size: 20px">8 (8442) 65-00-85</div>
-                    <div style="text-align: center;font-size: 16px">+7 (902) 362-57-94</div>
+                    <div class="header-center-block">
+                        <div style="text-align: center; font-weight: bold; font-size: 24px"><span class="glyphicon glyphicon-phone-alt"></span> 8 (8442) 65-00-85</div>
+                        <div style="text-align: center;font-size: 16px"><span class="glyphicon glyphicon-earphone"></span>+7 (902) 362-57-94</div>
+                    </div>
+
                 </div>
                 <div class="col-md-4">
                     <div>ул. Командира Рудь 1"А"</div>
