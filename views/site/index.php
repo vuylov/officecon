@@ -21,7 +21,12 @@ RoundaboutAsset::register($this);
         <div id="roundabout-next"></div>-->
     </div>
     <div class="container">
-        <hr class="style-work">
+
+        <div class="section-header">
+            <hr>
+            <div class="section-header-title">Наш бизнес-процесс</div>
+        </div>
+
         <ul class="list-inline work">
             <li><?= Html::img(Yii::$app->homeUrl.'img/steps/phone_g.png', ['class' => 'step', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Большой текст, большой большой большой большой еще больше еще больше еще больше']);?></li>
             <li><?= Html::img(Yii::$app->homeUrl.'img/steps/pointer.png');?></li>
@@ -34,7 +39,10 @@ RoundaboutAsset::register($this);
             <li><?= Html::img(Yii::$app->homeUrl.'img/steps/truck_g.png', ['class' => 'step','data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'HIIHIHI']);?></li>
         </ul>
         <div class="clearfix"></div>
-        <hr class="style-customer">
+        <div class="section-header">
+            <hr>
+            <div class="section-header-title">Наши заказчики</div>
+        </div>
         <ul class="list-inline banners">
             <li><?= Html::img(Yii::$app->homeUrl.'img/banners/logo-lukiol.gif');?></li>
             <li><?= Html::img(Yii::$app->homeUrl.'img/banners/logo_luk_inform.jpg');?></li>
