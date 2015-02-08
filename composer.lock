@@ -350,12 +350,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
-                "reference": "6d681f8b4dc1b9e4478c851d0e806ff810aa55c5"
+                "reference": "d82322541c897235e70f53a4190c85365a71229c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/6d681f8b4dc1b9e4478c851d0e806ff810aa55c5",
-                "reference": "6d681f8b4dc1b9e4478c851d0e806ff810aa55c5",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/d82322541c897235e70f53a4190c85365a71229c",
+                "reference": "d82322541c897235e70f53a4190c85365a71229c",
                 "shasum": ""
             },
             "type": "library",
@@ -390,7 +390,7 @@
                 "progress",
                 "upload"
             ],
-            "time": "2015-02-01 23:55:15"
+            "time": "2015-02-02 23:02:37"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -758,12 +758,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "07fea616749326ff4c0bbc72984c05f2ef2dbab2"
+                "reference": "01299530f3a716ffabb6da4c675fff6b7beceb49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/07fea616749326ff4c0bbc72984c05f2ef2dbab2",
-                "reference": "07fea616749326ff4c0bbc72984c05f2ef2dbab2",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/01299530f3a716ffabb6da4c675fff6b7beceb49",
+                "reference": "01299530f3a716ffabb6da4c675fff6b7beceb49",
                 "shasum": ""
             },
             "require": {
@@ -839,7 +839,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-02-02 05:55:32"
+            "time": "2015-02-02 23:03:13"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -940,12 +940,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-jui.git",
-                "reference": "38284e5cf623961cd71ada0f272174043b38f7a8"
+                "reference": "7efd594b773f2a2601fc7024cf764d1a2eaed8e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/38284e5cf623961cd71ada0f272174043b38f7a8",
-                "reference": "38284e5cf623961cd71ada0f272174043b38f7a8",
+                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/7efd594b773f2a2601fc7024cf764d1a2eaed8e8",
+                "reference": "7efd594b773f2a2601fc7024cf764d1a2eaed8e8",
                 "shasum": ""
             },
             "require": {
@@ -978,7 +978,7 @@
                 "jQuery UI",
                 "yii2"
             ],
-            "time": "2015-01-11 03:59:50"
+            "time": "2015-02-02 17:43:02"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",

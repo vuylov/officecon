@@ -61,8 +61,8 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => 'Главная', 'url' => ['/site/index']],
                     ['label' => 'Каталог', 'url' => ['catalog/index']],
-                    ['label' => 'Дизайн-проекты', 'url' => ['/designs/index']],
-                    ['label' => 'Портфолио', 'url' => ['/projects/index']],
+                    ['label' => 'Дизайн-проекты', 'url' => ['/project/design']],
+                    ['label' => 'Портфолио', 'url' => ['/project/portfolio']],
                     ['label' => 'О компании', 'url' => ['/site/about']],
                     ['label' => 'Контакты', 'url' => ['/site/contact']],
                     Yii::$app->user->isGuest ?
