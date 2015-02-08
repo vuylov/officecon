@@ -20,7 +20,12 @@ class AdminMenu {
             [
                 'label' => 'Цвета',
                 'url'   => ['color/index']
+            ],
+            [
+                'label' => 'Проекты',
+                'url'   => ['project/index']
             ]
+
         ];
         return $items;
     }

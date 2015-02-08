@@ -2,18 +2,23 @@
 
 namespace app\controllers;
 
+use app\models\Product;
 use Yii;
 use app\models\Project;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use app\models\File;
 
 /**
  * ProjectController implements the CRUD actions for Project model.
  */
 class ProjectController extends Controller
 {
+    public $layout = 'admin';
+
     public function behaviors()
     {
         return [
@@ -22,6 +27,16 @@ class ProjectController extends Controller
                 'actions' => [
                     'delete' => ['post'],
                 ],
+            ],
+            'access'    => [
+                'class' => AccessControl::className(),
+                'only'  => ['create', 'update', 'delete', 'index'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@']
+                    ]
+                ]
             ],
         ];
     }
@@ -41,15 +56,26 @@ class ProjectController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Project model.
-     * @param integer $id
-     * @return mixed
-     */
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id)
+        ]);
+    }
+
+    public function actionDesign()
+    {
+        $models = Project::find()->where('type = '.Project::DESIGN)->all();
+        return $this->render('view', [
+            'projects' => $models
+        ]);
+    }
+
+    public function actionPortfolio()
+    {
+        $models = Project::find()->where('type = '.Project::PORTFOLIO)->all();
+        return $this->render('view', [
+            'projects' => $models
         ]);
     }
 
@@ -63,7 +89,8 @@ class ProjectController extends Controller
         $model = new Project();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            File::saveUploadedImage($model, 'file');
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,

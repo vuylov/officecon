@@ -81,7 +81,7 @@ use kartik\file\FileInput;
                                 cache: false,
                                 url: '".Url::to(['file/delete', 'id' => $img->id])."',
                                 success: function(response){
-                                    alert('Изображение удалено удален');
+                                    alert('Изображение удалено');
                                     location.reload();
                                 }
                             });return false;
