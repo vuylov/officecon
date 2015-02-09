@@ -17,6 +17,8 @@ class Project extends \yii\db\ActiveRecord
     const DESIGN = 1;
     const PORTFOLIO = 100;
     const FILE_TYPE = 'project';
+    const ACTIVE    = 1;
+    const DEACTIVE = 0;
     public $file; //for file upload
     /**
      * @inheritdoc
@@ -32,11 +34,11 @@ class Project extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
-            [['description'], 'string'],
-            [['type'], 'integer'],
+            [['name','description_seo','keywords'], 'required', 'message' => 'Поля обязательные для заполнения'],
+            [['description','description_seo','keywords'], 'string'],
+            [['type', 'active'], 'integer'],
             [['name'], 'string', 'max' => 255],
-            [['file'], 'safe']
+            [['file', 'thumb_id', 'thumb_path'], 'safe']
         ];
     }
 
@@ -50,6 +52,9 @@ class Project extends \yii\db\ActiveRecord
             'name' => Yii::t('app', 'Название'),
             'description' => Yii::t('app', 'Описание'),
             'type' => Yii::t('app', 'Тип'),
+            'active'    => Yii::t('app', 'Активность'),
+            'description_seo'    => Yii::t('app', 'Описание для поисковых роботов'),
+            'keywords'    => Yii::t('app', 'Ключевые слова для поисковых роботов'),
             'file'  => Yii::t('app', 'Изображения для загрузки'),
         ];
     }

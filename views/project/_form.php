@@ -35,14 +35,20 @@ use app\models\Project;
         'prompt' => 'Укажите тип проекта'
     ]) ?>
 
+    <?= $form->field($model, 'keywords')->textarea(['row' => 5])->hint('Укажите ключевые слова через запятую');?>
+
+    <?= $form->field($model, 'description_seo')->textarea(['row' => 5]);?>
+
     <?php if(count($model->files) > 0):?>
         <div class="product-images">
             <?php foreach($model->files as $img):?>
                 <div class="image-item">
-                    <?=Html::img('@web/'.$img->path, ['id' => 'file-'.$img->id, 'class' => 'file-preview-image', 'alt' => $img->name, 'data' => $img->id]);?>
-                    <?=Html::a('Удалить', ['file/delete', 'id' => $img->id],[
-                        'class' => 'btn btn-danger delete-image',
-                        'onclick'   => "
+                    <?php $class = ($model->thumb_id === $img->id) ? 'start-image':'';?>
+                    <?=Html::img('@web/'.$img->path, ['id' => 'file-'.$img->id, 'class' => 'file-preview-image '.$class, 'alt' => $img->name, 'data' => $img->id]);?>
+                    <div class="manage-buttons-img">
+                        <?=Html::a('Удалить', ['file/delete', 'id' => $img->id],[
+                            'class' => 'btn btn-danger delete-image',
+                            'onclick'   => "
                             $.ajax({
                                 type: 'POST',
                                 cache: false,
@@ -53,7 +59,24 @@ use app\models\Project;
                                 }
                             });return false;
                         "
-                    ]);?>
+                        ]);?>
+                        <?php if($model->thumb_id !== $img->id):?>
+                            <?=Html::a('Сделать главной', ['project/defaultimg', 'model' => $model->id, 'id' => $img->id],[
+                                'class' => 'btn btn-success',
+                                'onclick'   => "
+                                $.ajax({
+                                    type: 'POST',
+                                    cache: false,
+                                    url: '".Url::to(['project/defaultimg', 'model' => $model->id, 'id' => $img->id])."',
+                                    success: function(response){
+                                        alert(response);
+                                        location.reload();
+                                    }
+                                });return false;
+                            "
+                            ]);?>
+                        <?php endif;?>
+                    </div>
                 </div>
             <?php endforeach;?>
         </div>

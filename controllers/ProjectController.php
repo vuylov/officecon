@@ -2,11 +2,12 @@
 
 namespace app\controllers;
 
-use app\models\Product;
 use Yii;
 use app\models\Project;
 use yii\data\ActiveDataProvider;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
+use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -30,7 +31,7 @@ class ProjectController extends Controller
             ],
             'access'    => [
                 'class' => AccessControl::className(),
-                'only'  => ['create', 'update', 'delete', 'index'],
+                'only'  => ['create', 'update', 'delete', 'index', 'defaultimg'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -63,20 +64,34 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function actionDesign()
+    public function actionDesign($id = null)
     {
-        $models = Project::find()->where('type = '.Project::DESIGN)->all();
-        return $this->render('view', [
-            'projects' => $models
-        ]);
+        $this->layout = 'main';
+        if($id === null){
+            $models = Project::find()->where('type = '.Project::DESIGN)->all();
+            return $this->render('_index', [
+                'projects' => $models
+            ]);
+        }else{
+            return $this->render('view', [
+                'model' => $this->findModel($id)
+            ]);
+        }
     }
 
-    public function actionPortfolio()
+    public function actionPortfolio($id = null)
     {
-        $models = Project::find()->where('type = '.Project::PORTFOLIO)->all();
-        return $this->render('view', [
-            'projects' => $models
-        ]);
+        $this->layout = 'main';
+        if($id === null){
+            $models = Project::find()->where('type = '.Project::PORTFOLIO)->all();
+            return $this->render('_index', [
+                'projects' => $models
+            ]);
+        }else{
+            return $this->render('view', [
+                'model' => $this->findModel($id)
+            ]);
+        }
     }
 
     /**
@@ -143,6 +158,24 @@ class ProjectController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function actionDefaultimg($model = null, $id = null)
+    {
+        if($id === null && $model === null){
+            echo 'Ошибка: не передан ID моделе или изображения';
+        }
+
+        $model  = $this->findModel($model);
+        $file   = File::findOne($id);
+
+        $model->thumb_id    = $file->id;
+        $model->thumb_path  = $file->path;
+        if($model->save()){
+            echo 'Изображение для заставки установлено';
+        }else{
+            var_dump($model->errors);
         }
     }
 }
