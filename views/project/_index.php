@@ -2,7 +2,6 @@
 use yii\helpers\Url;
 use app\models\Project;
 ?>
-
 <div class="row projects">
     <?php foreach($projects as $project):?>
         <div class="col-xs-6 col-md-3 project-detail">
@@ -16,3 +15,4 @@ use app\models\Project;
         </div>
     <?php endforeach;?>
 </div>
+<?php

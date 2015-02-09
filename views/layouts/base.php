@@ -40,7 +40,7 @@ AppAsset::register($this);
             </div>
             <div class="col-md-4">
                 <div class="header-center-block">
-                    <div><span class="glyphicon glyphicon-map-marker"></span><strong>Адрес</strong>: ул.Командира Рудь 1«А» офис 415</div>
+                    <div><span class="glyphicon glyphicon-map-marker"></span><strong>Адрес</strong>: <?=Html::a('ул.Командира Рудь 1«А» офис 415', ['site/contact']);?></div>
                     <div><span class="glyphicon glyphicon-envelope"></span> <strong>Email: </strong><a href="mailto:gleb-smu@yandex.ru">gleb-smu@yandex.ru</a></div>
                 </div>
             </div>

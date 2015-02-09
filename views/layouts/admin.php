@@ -1,3 +1,7 @@
+<?php
+use app\components\AdminMenu;
+use yii\widgets\Breadcrumbs;
+?>
 <?php $this->beginContent('@app/views/layouts/base.php'); ?>
     <div class="col-md-3 sidebar">
         <ul class="nav nav-sidebar">
