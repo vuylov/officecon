@@ -272,3 +272,6 @@ div.section-header-title{
     position: relative;
     top: -32px;
 }
+.start-image {
+    border: 5px solid #d9534f;
+}
