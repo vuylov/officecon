@@ -69,5 +69,8 @@ echo FancyBox::widget([
     <?php else:?>
         <div class="alert alert-info">Изображения не добавлены</div>
     <?php endif;?>
-
 </div>
+<?php
+$this->registerMetaTag(['name' => 'keywords', 'content' => $model->keywords]);
+$this->registerMetaTag(['name' => 'description', 'content' => $model->description_seo]);
+?>

@@ -70,11 +70,12 @@ class ProjectController extends Controller
         if($id === null){
             $models = Project::find()->where('type = '.Project::DESIGN)->all();
             return $this->render('_index', [
-                'projects' => $models
+                'projects'  => $models,
+                'type'      => Project::DESIGN
             ]);
         }else{
             return $this->render('view', [
-                'model' => $this->findModel($id)
+                'model' => $this->findModel($id),
             ]);
         }
     }
@@ -85,7 +86,8 @@ class ProjectController extends Controller
         if($id === null){
             $models = Project::find()->where('type = '.Project::PORTFOLIO)->all();
             return $this->render('_index', [
-                'projects' => $models
+                'projects'  => $models,
+                'type'      => Project::PORTFOLIO
             ]);
         }else{
             return $this->render('view', [
