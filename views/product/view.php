@@ -100,8 +100,7 @@ echo FancyBox::widget([
             'items' => DataProductItems::getItems($model),
         ]);?>
     </div>
-<?
+<?php
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->keywords]);
 $this->registerMetaTag(['name' => 'description', 'content' => $model->description_seo]);
-//$this->title = $model->name;
 ?>
