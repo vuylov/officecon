@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4902dda3145d288223cf30754ded264f",
+    "hash": "243bfd0dd9d683bce545282577f2fabf",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -127,16 +127,16 @@
         },
         {
             "name": "bower-asset/jquery.inputmask",
-            "version": "3.1.59",
+            "version": "3.1.61",
             "source": {
                 "type": "git",
                 "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
-                "reference": "6fcd2cf28ee111f8aadcd42a1b8d43d6f7a5c0ba"
+                "reference": "f2c086411d2557fc485c47afb3cecfa6c1de9ee2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/6fcd2cf28ee111f8aadcd42a1b8d43d6f7a5c0ba",
-                "reference": "6fcd2cf28ee111f8aadcd42a1b8d43d6f7a5c0ba",
+                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/f2c086411d2557fc485c47afb3cecfa6c1de9ee2",
+                "reference": "f2c086411d2557fc485c47afb3cecfa6c1de9ee2",
                 "shasum": ""
             },
             "require": {
@@ -232,7 +232,10 @@
                     "vendor/",
                     "script/",
                     "test/"
-                ]
+                ],
+                "branch-alias": {
+                    "dev-master": "2.0.2-dev"
+                }
             },
             "license": [
                 "MIT"
@@ -333,8 +336,7 @@
                 {
                     "name": "Edward Z. Yang",
                     "email": "admin@htmlpurifier.org",
-                    "homepage": "http://ezyang.com",
-                    "role": "Developer"
+                    "homepage": "http://ezyang.com"
                 }
             ],
             "description": "Standards compliant HTML filter written in PHP",
@@ -350,12 +352,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
-                "reference": "d82322541c897235e70f53a4190c85365a71229c"
+                "reference": "d3aacbfeb92e73a61e62964fe75cc700164bd561"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/d82322541c897235e70f53a4190c85365a71229c",
-                "reference": "d82322541c897235e70f53a4190c85365a71229c",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/d3aacbfeb92e73a61e62964fe75cc700164bd561",
+                "reference": "d3aacbfeb92e73a61e62964fe75cc700164bd561",
                 "shasum": ""
             },
             "type": "library",
@@ -390,7 +392,7 @@
                 "progress",
                 "upload"
             ],
-            "time": "2015-02-02 23:02:37"
+            "time": "2015-02-05 20:03:42"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -398,12 +400,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-krajee-base.git",
-                "reference": "02ca53ac2ce4d16c9874529349a713c1db4864ea"
+                "reference": "c0fcabfa772e681d1a3866d028ec2a6aaeb69313"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/02ca53ac2ce4d16c9874529349a713c1db4864ea",
-                "reference": "02ca53ac2ce4d16c9874529349a713c1db4864ea",
+                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/c0fcabfa772e681d1a3866d028ec2a6aaeb69313",
+                "reference": "c0fcabfa772e681d1a3866d028ec2a6aaeb69313",
                 "shasum": ""
             },
             "require": {
@@ -436,7 +438,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-02-01 18:23:30"
+            "time": "2015-02-07 01:55:51"
         },
         {
             "name": "kartik-v/yii2-widget-fileinput",
@@ -705,12 +707,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vova07/yii2-imperavi-widget.git",
-                "reference": "6302ce68ec3ba2120d3e46a498cf9d5fb1f77640"
+                "reference": "8843a9150be3c2252d1468fa65eae75f6ac123b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vova07/yii2-imperavi-widget/zipball/6302ce68ec3ba2120d3e46a498cf9d5fb1f77640",
-                "reference": "6302ce68ec3ba2120d3e46a498cf9d5fb1f77640",
+                "url": "https://api.github.com/repos/vova07/yii2-imperavi-widget/zipball/8843a9150be3c2252d1468fa65eae75f6ac123b2",
+                "reference": "8843a9150be3c2252d1468fa65eae75f6ac123b2",
                 "shasum": ""
             },
             "require": {
@@ -750,20 +752,20 @@
                 "yii 2",
                 "yii2"
             ],
-            "time": "2015-01-25 12:05:57"
+            "time": "2015-02-06 15:54:40"
         },
         {
             "name": "yiisoft/yii2",
-            "version": "dev-master",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "01299530f3a716ffabb6da4c675fff6b7beceb49"
+                "reference": "7ed175b4b71ac96eaf86aadc322186ecdc58498d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/01299530f3a716ffabb6da4c675fff6b7beceb49",
-                "reference": "01299530f3a716ffabb6da4c675fff6b7beceb49",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/7ed175b4b71ac96eaf86aadc322186ecdc58498d",
+                "reference": "7ed175b4b71ac96eaf86aadc322186ecdc58498d",
                 "shasum": ""
             },
             "require": {
@@ -773,7 +775,6 @@
                 "bower-asset/yii2-pjax": ">=2.0.1",
                 "cebe/markdown": "~1.0.0",
                 "ext-mbstring": "*",
-                "ext-mcrypt": "*",
                 "ezyang/htmlpurifier": "4.6.*",
                 "lib-pcre": "*",
                 "php": ">=5.4.0",
@@ -839,7 +840,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-02-02 23:03:13"
+            "time": "2014-12-07 16:42:41"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -940,12 +941,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-jui.git",
-                "reference": "7efd594b773f2a2601fc7024cf764d1a2eaed8e8"
+                "reference": "ed678becabecdbc1e73dd229422fab826603d510"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/7efd594b773f2a2601fc7024cf764d1a2eaed8e8",
-                "reference": "7efd594b773f2a2601fc7024cf764d1a2eaed8e8",
+                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/ed678becabecdbc1e73dd229422fab826603d510",
+                "reference": "ed678becabecdbc1e73dd229422fab826603d510",
                 "shasum": ""
             },
             "require": {
@@ -978,7 +979,7 @@
                 "jQuery UI",
                 "yii2"
             ],
-            "time": "2015-02-02 17:43:02"
+            "time": "2015-02-08 17:02:31"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
@@ -1050,9 +1051,9 @@
                 "bower-asset/jquery": ">=1.7"
             },
             "require-dev": {
-                "bower-asset/jasmine-ajax": ">=1.3.1,<1.4",
-                "bower-asset/jasmine-jquery": ">=1.5.2,<1.6",
-                "bower-asset/jquery": ">=1.7,<1.8"
+                "bower-asset/jasmine-ajax": "~1.3.1",
+                "bower-asset/jasmine-jquery": "~1.5.2",
+                "bower-asset/jquery": "~1.7"
             },
             "type": "bower-asset-library",
             "extra": {

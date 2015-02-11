@@ -3,7 +3,7 @@
 return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=officecon',
-    'username' => 'root',
-    'password' => '',
+    'username' => 'officeconuser',
+    'password' => '0fficeC0n2o15',
     'charset' => 'utf8',
 ];
