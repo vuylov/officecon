@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
     </div>
     <?php endif;?>
 </div>
-<?
+<?php
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->keywords]);
 $this->registerMetaTag(['name' => 'description', 'content' => $model->description]);
 $this->title = $model->name;
