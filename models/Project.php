@@ -34,7 +34,7 @@ class Project extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name','description_seo','keywords'], 'required', 'message' => 'Поля обязательные для заполнения'],
+            [['name','description_seo','keywords', 'type'], 'required', 'message' => 'Поля обязательные для заполнения'],
             [['description','description_seo','keywords'], 'string'],
             [['type', 'active'], 'integer'],
             [['name'], 'string', 'max' => 255],

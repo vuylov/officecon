@@ -126,6 +126,7 @@ class ProjectController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            File::saveUploadedImage($model, 'file');
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
