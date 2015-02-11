@@ -8,7 +8,7 @@ use yii\helpers\Url;
             <a href="<?=Url::to(['catalog/view', 'id' => $child->catalog->id, 'product' => $child->id]); ?>" class="thumbnail">
                 <?php if(count($child->files) > 0):?>
                     <?php $img = $child->files;?>
-                    <img src = '<?= Yii::$app->homeUrl.'/'.$img[0]->path;?>' style="height: 150px; width: 100%; display: block">
+                    <img src = '<?= Yii::$app->homeUrl.$img[0]->path;?>' style="height: 150px; width: 100%; display: block">
                     <div class="small product-notice">
                         <p><?=($child->name) ? $child->name : '';?></p>
                         <p><?=($child->article) ? $child->article : '';?></p>
