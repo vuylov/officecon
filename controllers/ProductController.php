@@ -92,9 +92,9 @@ class ProductController extends Controller
         $model->catalog_id  = $catalog->id;
 
         if($product !== null)
-            $product                = $this->findModel($product);
-            $model->parent_id       = $product->id;
-            $model->manufacturer_id = $product->manufacturer_id;
+            $productModel           = $this->findModel($product);
+            $model->parent_id       = $productModel->id;
+            $model->manufacturer_id = $productModel->manufacturer_id;
 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
