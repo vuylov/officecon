@@ -91,11 +91,11 @@ class ProductController extends Controller
         $catalog            = Catalog::findOne($catalog);
         $model->catalog_id  = $catalog->id;
 
-        if(!is_null($product))
+        if(!is_null($product)){
             $productModel           = $this->findModel($product);
             $model->parent_id       = $productModel->id;
             $model->manufacturer_id = $productModel->manufacturer_id;
-
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
