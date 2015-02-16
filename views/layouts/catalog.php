@@ -70,6 +70,7 @@ AppAsset::register($this);
                 ['label' => 'Контакты', 'url' => ['/site/contact']],
                 Yii::$app->user->isGuest ?
                     ['label' => 'Войти', 'url' => ['/site/login']] :
+                    ['label' => 'Админка', 'url' => ['/admin/index']],
                     ['label' => 'Выйти (' . Yii::$app->user->identity->name . ')',
                         'url' => ['/site/logout'],
                         'linkOptions' => ['data-method' => 'post']],
