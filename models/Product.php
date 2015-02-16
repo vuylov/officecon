@@ -219,4 +219,9 @@ class Product extends \yii\db\ActiveRecord
     {
         ProductColors::deleteAll('product_id = :p', [':p' => $this->id]);
     }
+
+    public function getProductFullName()
+    {
+        return $this->name.' ('.$this->article.')';
+    }
 }

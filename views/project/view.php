@@ -61,9 +61,8 @@ echo FancyBox::widget([
 
     <?php if(count($model->files) > 0):?>
         <?php foreach($model->files as $file):?>
-            <div style="width: 250px;height: 180px; overflow: hidden; float: left">
-                <a href="<?=Url::to(Yii::$app->homeUrl.$file->path);?>" rel="fancybox">
-                    <?= Html::img(Yii::$app->homeUrl.$file->path); ['width' => '250']?>
+            <div>
+                <a href="<?=Url::to(Yii::$app->homeUrl.$file->path);?>" rel="fancybox" class="img-container img-project-index" style="background-image: url('<?= Yii::$app->homeUrl.$file->path;?>')">
                 </a>
             </div>
         <?php endforeach;?>

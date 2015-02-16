@@ -16,7 +16,7 @@ use yii\bootstrap\Modal;
             ]);?>
 
         <?= $form->field($model, 'product_id')
-                ->dropDownList(ArrayHelper::map(Product::find()->where('parent_id = :p', [':p' => $composition->product_id])->all(), 'id', 'name'),[
+                ->dropDownList(ArrayHelper::map(Product::find()->where('parent_id = :p', [':p' => $composition->product_id])->all(), 'id', 'productFullName'),[
             'prompt'    => 'Выберите артикул'
         ]);?>
 
