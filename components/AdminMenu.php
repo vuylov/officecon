@@ -24,8 +24,11 @@ class AdminMenu {
             [
                 'label' => 'Проекты',
                 'url'   => ['project/index']
+            ],
+            [
+                'label' => 'Типы мебели',
+                'url'   => ['type/index']
             ]
-
         ];
         return $items;
     }
