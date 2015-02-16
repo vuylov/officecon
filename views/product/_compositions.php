@@ -21,7 +21,7 @@ foreach($model->compositions as $composition){
     if($composition->files){
         $files = $composition->files;
         $content .= '<div class="composition-image-wrapper">';
-        $content .= Html::a(Html::img(Yii::$app->homeUrl.$files[0]->path, ['class' => 'img-responsive img-thumbnail']),Yii::$app->homeUrl.'/'.$files[0]->path,['rel' => 'fancybox']);
+        $content .= Html::a(Html::img(Yii::$app->homeUrl.$files[0]->path, ['class' => 'img-responsive img-thumbnail']),Yii::$app->homeUrl.$files[0]->path,['rel' => 'fancybox']);
         $content .= '</div>';
     }
 
