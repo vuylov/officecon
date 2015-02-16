@@ -144,7 +144,7 @@ class ProductController extends Controller
         $catalog = $product->catalog_id;
         $product->delete();
 
-        return $this->redirect(['catalog/view', 'id' => $catalog->id]);
+        return $this->redirect(['catalog/view', 'id' => $catalog]);
     }
 
     /**
