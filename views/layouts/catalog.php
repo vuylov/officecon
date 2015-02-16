@@ -5,7 +5,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\components\CatalogMenu;
-
+use app\components\TopMenu;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -62,19 +62,7 @@ AppAsset::register($this);
             'options'           => ['class' => 'navbar-nav', 'id' => 'header-menu'],
             'activateParents'   => true,
             'route'  => 'catalog/index',
-            'items' => [
-                ['label' => 'Главная', 'url' => ['/site/index']],
-                ['label' => 'Каталог', 'url' => ['catalog/index']],
-                ['label' => 'Дизайн-проекты', 'url' => ['/project/design']],
-                ['label' => 'Портфолио', 'url' => ['/project/portfolio']],
-                ['label' => 'Контакты', 'url' => ['/site/contact']],
-                Yii::$app->user->isGuest ?
-                    ['label' => 'Войти', 'url' => ['/site/login']] :
-                    ['label' => 'Админка', 'url' => ['/admin/index']],
-                    ['label' => 'Выйти (' . Yii::$app->user->identity->name . ')',
-                        'url' => ['/site/logout'],
-                        'linkOptions' => ['data-method' => 'post']],
-            ],
+            'items' => TopMenu::getItems()
         ]);
         NavBar::end();
         ?>

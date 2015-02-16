@@ -3,6 +3,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use app\assets\AppAsset;
+use app\components\TopMenu;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -57,19 +58,7 @@ AppAsset::register($this);
         echo Nav::widget([
             'options'           => ['class' => 'navbar-nav', 'id' => 'header-menu'],
             'activateParents'   => true,
-            'items' => [
-                ['label' => 'Главная', 'url' => ['/site/index']],
-                ['label' => 'Каталог', 'url' => ['catalog/index']],
-                ['label' => 'Дизайн-проекты', 'url' => ['/project/design']],
-                ['label' => 'Портфолио', 'url' => ['/project/portfolio']],
-                ['label' => 'Контакты', 'url' => ['/site/contact']],
-                Yii::$app->user->isGuest ?
-                    ['label' => 'Войти', 'url' => ['/site/login']] :
-                    ['label' => 'Админка', 'url' => ['/admin/index']],
-                    ['label' => 'Выйти (' . Yii::$app->user->identity->name . ')',
-                        'url' => ['/site/logout'],
-                        'linkOptions' => ['data-method' => 'post', 'class' => 'navbar-right']],
-            ],
+            'items' => TopMenu::getItems()
         ]);
         NavBar::end();
         ?>
