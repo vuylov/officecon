@@ -65,9 +65,10 @@ foreach($model->compositions as $composition){
     <?= Accordion::widget([
         'items' => $items,
         'clientOptions' => [
-            'collapsible'   => false,
+            'collapsible'   => true,
             'heightStyle'   => 'content',
-            'icons'         => 'icons'
+            'icons'         => 'icons',
+            'active'        => false
         ],
     ]);?>
 </div>
