@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * TypeController implements the CRUD actions for Type model.
@@ -24,6 +25,16 @@ class TypeController extends Controller
                 'actions' => [
                     'delete' => ['post'],
                 ],
+            ],
+            'access'    => [
+                'class' => AccessControl::className(),
+                'only'  => ['create', 'update', 'delete', 'index'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@']
+                    ]
+                ]
             ],
         ];
     }
