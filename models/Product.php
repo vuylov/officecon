@@ -50,7 +50,7 @@ class Product extends \yii\db\ActiveRecord
             [['manufacturer_id', 'name', 'catalog_id', 'keywords', 'description_seo'], 'required', 'message' => 'не может быть пустым'],
             [['manufacturer_id', 'catalog_id'], 'integer'],
             [['description'], 'string'],
-            [['create_at', 'deactivate_at', 'active', 'parent_id','user_id', 'description', 'file', 'article', 'weight', 'volume', 'amount','price','type_id'], 'safe'],
+            [['create_at', 'deactivate_at', 'active', 'parent_id','user_id', 'description', 'file', 'article', 'weight', 'volume', 'amount','price','type_id', 'size'], 'safe'],
             [['name', 'producer'], 'string', 'max' => 255]
         ];
     }
