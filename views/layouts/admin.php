@@ -3,6 +3,7 @@ use app\components\AdminMenu;
 use yii\widgets\Breadcrumbs;
 ?>
 <?php $this->beginContent('@app/views/layouts/base.php'); ?>
+<div class="row">
     <div class="col-md-3 sidebar">
         <ul class="nav nav-sidebar">
             <?php echo \yii\bootstrap\Nav::widget([
@@ -27,5 +28,5 @@ use yii\widgets\Breadcrumbs;
             </div>
         </div>
     </div>
-    </div>
+</div>
 <?php $this->endContent(); ?>
