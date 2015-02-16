@@ -28,8 +28,8 @@ class Type extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'name'], 'required'],
-            [['id'], 'integer'],
+            [['name'], 'required'],
+            [['id'], 'safe'],
             [['name'], 'string', 'max' => 50]
         ];
     }
