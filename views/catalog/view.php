@@ -1,6 +1,8 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\VarDumper;
+use yii\helpers\Url;
+
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Каталог', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $this->title];
@@ -19,19 +21,24 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
         <?= Html::a('Добавить продукт', ['product/create', 'catalog' => $model->id], ['class' => 'btn btn-success']);?>
     </div>
 <?php endif;?>
-<div>
+<div class="row">
     <?php if(count($model->products) > 0):?>
-    <div>
-        <ul>
-            <?php foreach($model->products as $product):?>
-                <?php if(is_null($product->parent_id)):?>
-                    <li>
-                        <?=Html::a($product->name, ['catalog/view', 'id' => $model->id, 'product' => $product->id]);?>
-                    </li>
-                <?php endif;?>
-            <?php endforeach;?>
-        </ul>
-    </div>
+        <?php foreach($model->products as $product):?>
+            <?php if(is_null($product->parent_id)):?>
+                <div class="col-xs-6 col-md-3">
+                    <?php if(count($product->files) > 0):?>
+                        <?php $imgArray = $product->files;?>
+                        <a href="<?=Url::to(['catalog/view', 'id' => $model->id, 'product' => $product->id]); ?>" class="thumbnail color-link img-container" style="background-image: url('<?= Yii::$app->homeUrl.$imgArray[0]->path;?>')">
+                            <div class="img-color-name"><?=$product->name;?></div>
+                        </a>
+                    <?php else:?>
+                        <a href="<?=Url::to(['catalog/view', 'id' => $model->id, 'product' => $product->id]); ?>">
+                            <?=$product->name;?>
+                        </a>
+                    <?php endif;?>
+                </div>
+            <?php endif;?>
+        <?php endforeach;?>
     <?php endif;?>
 </div>
 <?php
