@@ -91,7 +91,7 @@ class ProductController extends Controller
         $catalog            = Catalog::findOne($catalog);
         $model->catalog_id  = $catalog->id;
 
-        if($product !== null)
+        if(!is_null($product))
             $productModel           = $this->findModel($product);
             $model->parent_id       = $productModel->id;
             $model->manufacturer_id = $productModel->manufacturer_id;
