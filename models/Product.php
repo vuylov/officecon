@@ -148,7 +148,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getCompositions()
     {
-        return $this->hasMany(Composition::className(), ['product_id' => 'id']);
+        return $this->hasMany(Composition::className(), ['product_id' => 'id'])->orderBy('name');
     }
 
     /**
