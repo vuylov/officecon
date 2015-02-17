@@ -100,9 +100,14 @@ AppAsset::register($this);
             <span class="clearfix"></span>
         </div>
     </div>
-    <footer class="footer green-layout">
+    <footer class="footer">
         <div class="container">
-            <p class="pull-left">&copy; ОфисКон <?= date('Y') ?></p>
+            <div class="row">
+                <div class="col-md-12">
+                    <div>&copy; ОфисКон <?= date('Y') ?></div>
+                    <div>Все права защищены и охраняются законом. Использование материалов сайта разрешено только с письменного разрешения ООО «ОфисКон». Информация, размещенная на сайте, не является публичной офертой. За дополнительной информацией обращайтесь по вышеуказанным телефонам</div>
+                </div>
+            </div>
         </div>
     </footer>
 </div>
