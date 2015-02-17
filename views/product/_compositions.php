@@ -10,7 +10,13 @@ foreach($model->compositions as $composition){
     (!Yii::$app->user->isGuest)?
         $buttons = '<span class="pull-right buttons-group">'.
             Html::a('Изменить компоновку', ['composition/update', 'id' => $composition->id], ['class' => 'btn btn-primary']).
-            Html::a('Удалить компоновку', ['composition/delete', 'id' => $composition->id], ['class' => 'btn btn-danger']).
+            Html::a('Удалить компоновку', ['composition/delete', 'id' => $composition->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Вы уверены что хотите удалить компановку?',
+                    'method' => 'post',
+                ],
+            ]).
             Html::a('Добавить продукт', ['composition/add', 'id' => $composition->id], ['class' => 'btn btn-success']).
             '</span><span class="clearfix"></span>':
         $buttons = '';

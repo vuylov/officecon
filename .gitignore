@@ -27,5 +27,5 @@ phpunit.phar
 /phpunit.xml
 #upload files
 /web/upload
-#config
-/config/db.php
+#upload in remote server
+/upload
