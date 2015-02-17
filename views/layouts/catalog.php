@@ -95,7 +95,7 @@ AppAsset::register($this);
 
             </div>
         </div>
-        <div>
+        <div style="margin-top: 20px">
             <img src="<?=Yii::$app->homeUrl.'img/why.png';?>" class="img-responsive" style="float: right">
             <span class="clearfix"></span>
         </div>
