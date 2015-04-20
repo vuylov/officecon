@@ -67,9 +67,12 @@ AppAsset::register($this);
         </div>
     </div>
     <div class="row footer">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <div>&copy; ОфисКон <?= date('Y') ?></div>
             <div>Все права защищены и охраняются законом. Использование материалов сайта разрешено только с письменного разрешения ООО «ОфисКон». Информация, размещенная на сайте, не является публичной офертой. За дополнительной информацией обращайтесь по вышеуказанным телефонам</div>
+        </div>
+        <div class="col-md-2 text-center">
+            <a href="http://www.volsu.ru"><?= Html::img('@web/img/banners/volsu_grad.jpg', ['class' => 'img-thumbnail']);?></a>
         </div>
     </div>
 </div>
