@@ -3,7 +3,7 @@
 use app\assets\RoundaboutAsset;
 use yii\helpers\Html;
 
-$this->title = 'Офискон: конструируем офинсое пространство';
+$this->title = 'Офискон: конструируем офисное пространство';
 RoundaboutAsset::register($this);
 ?>
 <div class="site-index">
