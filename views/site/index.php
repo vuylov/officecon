@@ -30,7 +30,7 @@ RoundaboutAsset::register($this);
         <ul class="list-inline work">
             <li><?= Html::img(Yii::$app->homeUrl.'img/steps/phone_g.png', ['class' => 'step', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Понравилась офисная мебель на сайте? Не можете выбрать или интересуют детали? Звоните нам!!!']);?></li>
             <li><?= Html::img(Yii::$app->homeUrl.'img/steps/pointer.png');?></li>
-            <li><?= Html::img(Yii::$app->homeUrl.'img/steps/lamp_g.png', ['class' => 'step','data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'У нас есть много кретивных идей, опирающихся на на современные технологии и более десятилетний опыт работы']);?></li>
+            <li><?= Html::img(Yii::$app->homeUrl.'img/steps/lamp_g.png', ['class' => 'step','data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'У нас есть много креативных идей, опирающихся на на современные технологии и более десятилетний опыт работы']);?></li>
             <li><?= Html::img(Yii::$app->homeUrl.'img/steps/pointer.png');?></li>
             <li><?= Html::img(Yii::$app->homeUrl.'img/steps/demon_g.png', ['class' => 'step','data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Мы трансформируем идею любой сложности в проект, оптимальный для Ваших потребностей и бюджета']);?></li>
             <li><?= Html::img(Yii::$app->homeUrl.'img/steps/pointer.png');?></li>
