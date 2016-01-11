@@ -28,15 +28,15 @@ RoundaboutAsset::register($this);
         </div>
 
         <ul class="list-inline work">
-            <li><?= Html::img(Yii::$app->homeUrl.'img/steps/phone_g.png', ['class' => 'step', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Понравилась офисная мебель на сайте? Не можете выбрать или интересуют детали? Звоните нам!!!']);?></li>
+            <li><?= Html::img(Yii::$app->homeUrl.'img/steps/phone_g.png', ['class' => 'step', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Понравилась офисная мебель на сайте? Не можете выбрать или интересуют детали? Позвоните нам']);?></li>
             <li><?= Html::img(Yii::$app->homeUrl.'img/steps/pointer.png');?></li>
-            <li><?= Html::img(Yii::$app->homeUrl.'img/steps/lamp_g.png', ['class' => 'step','data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'У нас есть много креативных идей, опирающихся на на современные технологии и более десятилетний опыт работы']);?></li>
+            <li><?= Html::img(Yii::$app->homeUrl.'img/steps/lamp_g.png', ['class' => 'step','data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'У нас есть много креативных идей, опирающихся на современные технологии и более десятилетний опыт работы.']);?></li>
             <li><?= Html::img(Yii::$app->homeUrl.'img/steps/pointer.png');?></li>
-            <li><?= Html::img(Yii::$app->homeUrl.'img/steps/demon_g.png', ['class' => 'step','data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Мы трансформируем идею любой сложности в проект, оптимальный для Ваших потребностей и бюджета']);?></li>
+            <li><?= Html::img(Yii::$app->homeUrl.'img/steps/demon_g.png', ['class' => 'step','data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Мы трансформируем идею любой сложности в проект, оптимальный для Ваших потребностей и бюджета.']);?></li>
             <li><?= Html::img(Yii::$app->homeUrl.'img/steps/pointer.png');?></li>
-            <li><?= Html::img(Yii::$app->homeUrl.'img/steps/hand_g.png', ['class' => 'step','data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Оформим договор в соответствии с законодательством РФ']);?></li>
+            <li><?= Html::img(Yii::$app->homeUrl.'img/steps/hand_g.png', ['class' => 'step','data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Оформим договор в соответствии с законодательством РФ.']);?></li>
             <li><?= Html::img(Yii::$app->homeUrl.'img/steps/pointer.png');?></li>
-            <li><?= Html::img(Yii::$app->homeUrl.'img/steps/truck_g.png', ['class' => 'step','data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'В минимальные сроку осуществим доставку и установку']);?></li>
+            <li><?= Html::img(Yii::$app->homeUrl.'img/steps/truck_g.png', ['class' => 'step','data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'В минимальные сроку осуществим доставку и установку.']);?></li>
         </ul>
         <div class="clearfix"></div>
         <div class="section-header">
